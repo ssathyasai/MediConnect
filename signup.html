@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediConnect Signup</title>
+    <style>
+      body {
+        background-image: url(sign.jpg);
+        box-sizing: border-box;
+        background-size: cover;
+        background-repeat: no-repeat;
+    background-attachment: fixed;
+      }
+      #su {
+        text-align: center;
+        font-family: "Josefin Sans", sans-serif;
+      }
+      form {
+        background: #8DDFCB
+;
+        display: flex;
+        flex-direction: column;
+        padding: 2vw 4vw;
+        width: 90%;
+        max-width: 600px;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        margin-top: 50px;
+        margin-left: 40%;
+        margin-right: 25%;
+      }
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      form input,
+      for,
+      textarea {
+        border: 0;
+        margin: 10px 0;
+        padding: 20px;
+        outline: none;
+        background: #fff0f5;
+        font-size: 16px;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+      }
+      #ff {
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 30px;
+        text-align: center;
+        font-family: "Cinzel", serif;
+      }
+      form button {
+        padding: 15px;
+        background: #ff5361;
+        color: #fff0f5;
+        font-size: 18px;
+        border: 0;
+        outline: none;
+        cursor: pointer;
+        width: 150px;
+        margin: 20px auto 0;
+        border-radius: 30px;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        -ms-border-radius: 30px;
+        -o-border-radius: 30px;
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Cabin:wght@600&family=Cinzel:wght@800&family=Gabarito&family=Inconsolata&family=Nosifer&family=Nunito:wght@300&family=Ubuntu:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <form action="mail.php" method="POST">
+        <h1 id="ff">Sign UP</h1>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="First Name"
+          required
+        />
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Last Name"
+          required
+        />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email id"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter password"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Confirm password"
+          required
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

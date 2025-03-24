@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediConnect</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <style>
+    body {
+      background-color: #ffffff;
+      font-family: 'Nunito', sans-serif;
+      color: #333;
+    }
+
+    #nav {
+      background-color: #005f73 !important;
+    }
+
+    h1 {
+      font-family: "Cabin", sans-serif;
+      text-align: center;
+      color: #005f73;
+      margin-top: 40px;
+      margin-bottom: 30px;
+      font-size: 2.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    h3 {
+      font-family: 'Anton', sans-serif;
+      font-size: 2.5rem;
+      text-align: center;
+      font-weight: 800;
+      color: #0a9396;
+    }
+
+    .services-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+    }
+
+    .card {
+      transition: transform 0.3s, box-shadow 0.3s;
+      background-color: #ffffff !important;
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      color: #333;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      width: 280px;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 25px;
+      text-align: center;
+    }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #005f73;
+      margin-bottom: 15px;
+    }
+
+    .card-text {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 400;
+      margin-bottom: 20px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .pp {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    #h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 50px;
+      color: #005f73;
+    }
+
+    #pa {
+      display: inline-block;
+      color: #333;
+      font-family: 'Dancing Script', cursive;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 1.7;
+    }
+
+    .section {
+      padding: 60px 20px;
+      margin: 40px 0;
+      border-radius: 15px;
+      background-color: #fff0f5;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .section img {
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s;
+    }
+
+    .section img:hover {
+      transform: scale(1.03);
+    }
+
+    .btn-primary {
+      background-color: #0a9396;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      transition: all 0.3s;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 10px rgba(10, 147, 150, 0.3);
+    }
+
+    .btn-primary:hover {
+      background-color: #94d2bd;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(10, 147, 150, 0.4);
+    }
+
+    .navbar-brand, .nav-link {
+      color: #ffffff !important;
+    }
+
+    .navbar-brand:hover, .nav-link:hover {
+      color: #e9d8a6 !important;
+    }
+
+    .dropdown-menu {
+      background-color: #005f73;
+    }
+
+    .dropdown-item {
+      color: #ffffff !important;
+    }
+
+    .dropdown-item:hover {
+      background-color: #0a9396;
+      color: #fff !important;
+    }
+
+    .form-control {
+      border-radius: 25px;
+    }
+
+    .btn-outline-success {
+      border-radius: 25px;
+    }
+
+    .btn-success {
+      border-radius: 25px;
+      background-color: #28a745;
+    }
+
+    .footer {
+      background-color: #005f73;
+      color: #ffffff;
+      padding: 30px;
+      text-align: center;
+      margin-top: 60px;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .footer a {
+      color: #e9d8a6;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer a:hover {
+      color: #ffffff;
+    }
+
+    .about-content, .vision-content, .contact-content {
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .hero-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
+      padding: 40px;
+      margin: 0 auto;
+      gap: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        flex-direction: column;
+      }
+      .hero-section img {
+        width: 80%;
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cabin:wght@600&family=Cinzel:wght@800&family=Dancing+Script&family=Gabarito&family=Inconsolata&family=Libre+Baskerville:wght@700&family=Nosifer&family=Nunito:wght@300;400;700&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary nav-underline" id="nav">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="login.html">MediConnect</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="login.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About Us</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Services
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="mentalhealth.html">Mental Health</a></li>
+              <li><a class="dropdown-item" href="symptom.html">Symptom Checker</a></li>
+              <li><a class="dropdown-item" href="data.html">Health Data</a></li>
+              <li><a class="dropdown-item" href="meal.html">Nutrition Planning</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" href="about.html">Contact Us</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit">
+            Search
+          </button>
+          <a href="l.html"><button type="button" class="btn btn-primary" style="margin-left: 10px;">
+            Login
+          </button></a>
+          <a href="signup.html"><button type="button" class="btn btn-success" style="margin-left: 10px;">SignUp</button></a>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="section">
+    <div class="hero-section">
+      <img src="Screenshot_2023-10-19_212350-removebg-preview (1).png"
+        style="width: 40%; max-width: 300px; border-radius: 8px; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);">
+
+      <div>
+        <h2 style="margin-bottom: 20px;" id="h2">Where Health Meets Technology...</h2>
+        <p id="pa">Welcome to MediConnect, where the future of healthcare is in your hands. We're
+          not just a website; we're a movement dedicated to simplifying and revolutionizing the way you take care of your
+          health. Our digital platform empowers you with personalized guidance, quick access to doctors, and a vibrant
+          community that supports your well-being journey. With a commitment to data security and the latest in AI-driven
+          insights, we're redefining healthcare – making it personal, accessible, and empowering for everyone. Join us in
+          this transformative journey to elevate your health and elevate your life.</p>
+      </div>
+    </div>
+  </div>
+
+  <h1>Our Services</h1>
+  <div class="section">
+    <div class="services-container">
+      <div class="card">
+        <img src="photo-1576091160550-2173dba999ef.avif" class="card-img-top" alt="Health Data"/>
+        <div class="card-body">
+          <h5 class="card-title">Health Data</h5>
+          <p class="card-text">
+            The smart health system seamlessly records and updates your vital health
+            data, providing a comprehensive and portable record for better healthcare decisions.
+          </p>
+          <a href="data.html" class="btn btn-primary">Explore</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <img src="photo-1460925895917-afdab827c52f.avif" class="card-img-top" alt="Symptom Checker"/>
+        <div class="card-body">
+          <h5 class="card-title">Symptom Checker</h5>
+          <p class="card-text">
+            Our advanced AI algorithms analyze your symptoms and offer personalized health 
+            insights, helping you understand potential conditions and next steps.
+          </p>
+          <a href="symptom.html" class="btn btn-primary">Check Now</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <img src="photo-1569420077790-afb136b3bb8c.avif" class="card-img-top" alt="Nutritional Meal Planning"/>
+        <div class="card-body">
+          <h5 class="card-title">Nutritional Meal Planning</h5>
+          <p class="card-text">
+            Optimize your diet for health, fitness, and well-being with customized meal plans 
+            ensuring balanced, delicious nutrition tailored to your needs.
+          </p>
+          <a href="meal.html" class="btn btn-primary">Plan Meals</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <img src="premium_photo-1679429321023-dff2ea455b0c.avif" class="card-img-top" alt="Mental Health"/>
+        <div class="card-body">
+          <h5 class="card-title">Mental Health</h5>
+          <p class="card-text">
+            Prioritize your emotional well-being and psychological resilience through our 
+            specialized counseling, therapy resources, and self-care guidance.
+          </p>
+          <a href="mentalhealth.html" class="btn btn-primary">Get Support</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 30px; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 300px;">
+        <img src="aboutus1.png" style="max-width: 100%; height: auto" />
+      </div>
+      <div style="flex: 1; padding: 30px; background-color:#fff; border-radius: 15px; min-width: 300px;" class="about-content">
+        <h3 style="font-size: 28px">ABOUT US</h3>
+        <p style="font-size: 18px" class="pp">
+          At MediConnect, we are on a mission to revolutionize healthcare in the
+          digital age. Our project is driven by the belief that access to
+          quality healthcare should be simple, convenient, and empowering. With
+          technology as our ally, we're dedicated to making healthcare easy and
+          accessible for everyone. In an era where technology has transformed
+          nearly every aspect of our lives, healthcare should be no exception.
+          We believe that the journey to optimal health should be marked by
+          ease, convenience, and empowerment at every turn. We are committed to
+          leveraging the latest technological advancements to redefine the way
+          individuals access and experience healthcare. Our mission is to break
+          down the barriers that have historically made healthcare a complex and
+          daunting endeavor. We envision a future where seeking medical
+          assistance, preventive care, and wellness management is as
+          straightforward as the tap of a screen or the click of a button. With
+          technology as the cornerstone of our approach, we aim to put the power
+          of healthcare back into your hands. Join us in our pursuit to simplify,
+          enhance, and democratize healthcare for one and all.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 30px; flex-wrap: wrap;">
+      <div style="flex: 1; padding: 30px; background-color: #fff; border-radius: 15px; min-width: 300px;" class="vision-content">
+        <h3 style="font-size: 28px">OUR VISION</h3>
+        <p style="font-size: 18px" class="pp">
+          Our vision is to create a healthcare ecosystem where individuals have
+          the tools and resources to take charge of their well-being. We want to
+          provide a platform that not only helps you find the right healthcare
+          solutions but also assists you in managing your health proactively. In
+          this ever-evolving digital age, the healthcare landscape is undergoing
+          a profound transformation. We understand that access to quality
+          healthcare should not be a complex and daunting process. It should be
+          an empowering and seamless experience that puts you in control of your
+          health journey. At MediConnect, we envision a world where individuals
+          are no longer passive recipients of healthcare services but active
+          participants in their own well-being. We aim to empower you with the
+          knowledge, tools, and support you need to make informed decisions
+          about your health. We believe that every person has the right to be
+          the captain of their health ship, steering it toward a healthier and
+          happier life. Our platform is not just about finding doctors or
+          treatments when you're already unwell; it's about guiding you in
+          preventing illnesses, maintaining a healthy lifestyle, and making the
+          right choices every step of the way. We are committed to offering a
+          comprehensive set of services and resources that promote wellness,
+          prevention, and early intervention.
+        </p>
+      </div>
+      <div style="flex: 1; min-width: 300px;">
+        <img src="ourvision-removebg-preview.png" style="max-width: 100%; height: auto" />
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 30px; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 300px;">
+        <img src="contactus.png" style="max-width: 100%; height: auto" />
+      </div>
+      <div style="flex: 1; padding: 30px; background-color: #fff; border-radius: 15px; min-width: 300px;" class="contact-content">
+        <h3 style="font-size: 28px">CONTACT US</h3>
+        <p style="font-size: 18px" class="pp">
+          If you have any questions, suggestions, or inquiries, we are here to
+          assist you. Your feedback is valuable to us, and we are committed to
+          providing you with the best support and information. Please don't
+          hesitate to reach out to us via email at
+          <a href="mailto:mediconnect@gmail.com" style="font-size: 18px; color: #0a9396; font-weight: 600;">mediconnect@gmail.com</a>. We will make every
+          effort to respond promptly and address your
+          needs. Your input helps us improve our services and better serve your
+          healthcare needs. Thank you for considering MediConnect as your
+          trusted healthcare partner. We look forward to hearing from you. Best
+          regards, The MediConnect Team
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2023 MediConnect. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+</html>
