@@ -126,23 +126,6 @@
       transform: scale(1.03);
     }
 
-    .btn-primary {
-      background-color: #0a9396;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 25px;
-      transition: all 0.3s;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      box-shadow: 0 4px 10px rgba(10, 147, 150, 0.3);
-    }
-
-    .btn-primary:hover {
-      background-color: #94d2bd;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(10, 147, 150, 0.4);
-    }
-
     .navbar-brand, .nav-link {
       color: #ffffff !important;
     }
@@ -162,6 +145,10 @@
     .dropdown-item:hover {
       background-color: #0a9396;
       color: #fff !important;
+    }
+    .btn {
+      border-radius: 25px;
+      font-weight: 600;
     }
 
     .form-control {
@@ -212,6 +199,55 @@
       margin: 0 auto;
       gap: 30px;
     }
+    .dashboard-container {
+          display: flex;
+          justify-content: space-around;
+          flex-wrap: wrap;
+          margin-top: 20px;
+      }
+      .dashboard-container .card {
+          width: 18rem;
+          margin: 10px;
+      }
+      .nav-underline .nav-link.active {
+          border-bottom: 2px solid #007bff;
+      }
+      .nav-underline .nav-link:hover {
+          border-bottom: 2px solid #007bff;
+      }
+      .nav-underline .dropdown-menu {
+          border: 1px solid #007bff;
+      }
+      body {
+      background-color: #b6fffa;
+    }
+        .dashboard-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .dashboard-container .card {
+            width: 18rem;
+            margin: 10px;
+        }
+        .nav-underline .nav-link.active {
+            border-bottom: 2px solid #007bff;
+        }
+        .nav-underline .nav-link:hover {
+            border-bottom: 2px solid #007bff;
+        }
+        .nav-underline .dropdown-menu {
+            border: 1px solid #007bff;
+        }
+        .health-widget {
+    width: 18rem;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #d2e0fb;
+}
 
     @media (max-width: 768px) {
       .hero-section {
@@ -274,7 +310,6 @@
       </div>
     </div>
   </nav>
-
   <div class="section">
     <div class="hero-section">
       <img src="images/Screenshot_2023-10-19_212350-removebg-preview (1).png"
