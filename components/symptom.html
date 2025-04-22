@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Symptom Checker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <style>
+    body {
+      background-color: #b6fffa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #symptom-checker {
+      max-width: 600px;
+      width: 100%;
+      background-color: #d2e0fb;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    label {
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #B31312;
+      color: #fff;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cabin:wght@600&family=Cinzel:wght@800&family=Dancing+Script&family=Gabarito&family=Inconsolata&family=Libre+Baskerville:wght@700&family=Nosifer&family=Nunito:wght@300&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="symptom-checker">
+    <h1>Symptom Checker</h1>
+    <p>Enter your symptoms below to receive personalized health tips.</p>
+    <label for="symptoms">Symptoms:</label>
+    <input type="text" id="symptoms" placeholder="Enter symptoms separated by commas">
+    <button onclick="checkSymptoms()">Check Symptoms</button>
+    <div id="result"></div>
+
+    <table id="disease-table" style="display:none;">
+      <thead>
+        <tr>
+          <th>Disease</th>
+          <th>Probability</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table content will be dynamically added here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function checkSymptoms() {
+      var symptomsInput = document.getElementById("symptoms").value.toLowerCase();
+      var resultDiv = document.getElementById("result");
+      var tableDiv = document.getElementById("disease-table");
+      var tableBody = document.querySelector("#disease-table tbody");
+
+      // Example diseases and symptoms (for demonstration purposes)
+      var diseases = [
+  { name: "Common Cold", symptoms: ["runny nose", "sneezing", "cough"] },
+  { name: "Influenza", symptoms: ["fever", "body aches", "fatigue"] },
+  { name: "Allergies", symptoms: ["itchy eyes", "sneezing", "nasal congestion"] },
+  { name: "COVID-19", symptoms: ["fever", "cough", "shortness of breath", "loss of taste or smell"] },
+  { name: "Pneumonia", symptoms: ["high fever", "chest pain", "difficulty breathing"] },
+  { name: "Bronchitis", symptoms: ["persistent cough", "shortness of breath", "chest discomfort"] },
+  { name: "Asthma", symptoms: ["wheezing", "shortness of breath", "chest tightness"] },
+  { name: "Gastroenteritis", symptoms: ["nausea", "vomiting", "diarrhea", "abdominal pain"] },
+  { name: "Urinary Tract Infection", symptoms: ["burning sensation during urination", "frequent urination", "lower abdominal pain"] },
+  { name: "Migraine", symptoms: ["severe headache", "sensitivity to light", "nausea"] },
+  { name: "Hypertension", symptoms: ["headache", "dizziness", "chest pain"] },
+  { name: "Diabetes", symptoms: ["excessive thirst", "frequent urination", "fatigue"] },
+  { name: "Rheumatoid Arthritis", symptoms: ["joint pain", "morning stiffness", "swelling"] },
+  { name: "Lupus", symptoms: ["joint pain", "skin rash", "fatigue"] },
+  { name: "Osteoarthritis", symptoms: ["joint pain", "stiffness", "limited range of motion"] },
+  { name: "Celiac Disease", symptoms: ["abdominal pain", "bloating", "diarrhea"] },
+  { name: "Crohn's Disease", symptoms: ["abdominal pain", "diarrhea", "weight loss"] },
+  { name: "Ulcerative Colitis", symptoms: ["bloody stools", "abdominal pain", "diarrhea"] },
+  { name: "Hepatitis", symptoms: ["jaundice", "fatigue", "abdominal pain"] },
+  { name: "HIV/AIDS", symptoms: ["persistent fever", "unexplained weight loss", "fatigue"] },
+  { name: "Anemia", symptoms: ["fatigue", "weakness", "pale skin"] },
+  { name: "Epilepsy", symptoms: ["seizures", "confusion", "uncontrollable movements"] },
+  { name: "Parkinson's Disease", symptoms: ["tremors", "stiffness", "difficulty walking"] },
+  { name: "Alzheimer's Disease", symptoms: ["memory loss", "confusion", "difficulty performing familiar tasks"] },
+  { name: "Schizophrenia", symptoms: ["hallucinations", "delusions", "disorganized thinking"] },
+  { name: "Bipolar Disorder", symptoms: ["mood swings", "energy changes", "difficulty sleeping"] },
+  { name: "Depression", symptoms: ["persistent sadness", "loss of interest", "changes in appetite"] },
+  { name: "Generalized Anxiety Disorder", symptoms: ["excessive worry", "restlessness", "fatigue"] },
+  { name: "Panic Disorder", symptoms: ["sudden and intense fear", "chest pain", "shortness of breath"] },
+  { name: "Obsessive-Compulsive Disorder", symptoms: ["obsessions", "compulsions", "anxiety"] },
+  { name: "Post-Traumatic Stress Disorder", symptoms: ["flashbacks", "nightmares", "hypervigilance"] },
+  { name: "Sleep Apnea", symptoms: ["loud snoring", "pauses in breathing during sleep", "daytime sleepiness"] },
+  { name: "Insomnia", symptoms: ["difficulty falling asleep", "difficulty staying asleep", "waking up too early"] },
+  { name: "Cataracts", symptoms: ["cloudy or blurry vision", "sensitivity to light", "difficulty seeing at night"] },
+  { name: "Glaucoma", symptoms: ["gradual loss of peripheral vision", "eye pain", "blurred vision"] },
+  { name: "Macular Degeneration", symptoms: ["blurred or distorted vision", "difficulty recognizing faces", "dark spots"] },
+  { name: "Hemorrhoids", symptoms: ["anal itching", "pain or discomfort", "bleeding during bowel movements"] },
+  { name: "Gout", symptoms: ["joint pain", "swelling", "redness"] },
+  { name: "Kidney Stones", symptoms: ["severe pain in the side or back", "blood in urine", "frequent urination"] },
+  { name: "Ovarian Cancer", symptoms: ["abdominal bloating", "pelvic pain", "feeling full quickly"] },
+  { name: "Prostate Cancer", symptoms: ["frequent urination", "difficulty starting or stopping urination", "blood in urine"] },
+  { name: "Breast Cancer", symptoms: ["lump in the breast", "changes in breast size or shape", "nipple discharge"] },
+  { name: "Colon Cancer", symptoms: ["changes in bowel habits", "blood in stool", "abdominal discomfort"] },
+];
+
+
+      var matchedDiseases = [];
+
+      diseases.forEach(function (disease) {
+        var matchedSymptoms = symptomsInput.split(',').filter(function (symptom) {
+          return disease.symptoms.includes(symptom.trim());
+        });
+
+        if (matchedSymptoms.length > 0) {
+          var probability = (matchedSymptoms.length / disease.symptoms.length) * 100;
+          matchedDiseases.push({ name: disease.name, probability: probability.toFixed(2) });
+        }
+      });
+      matchedDiseases.sort(function (a, b) {
+      return b.probability - a.probability;
+    });
+
+      if (matchedDiseases.length > 0) {
+        resultDiv.innerHTML = "Based on the provided symptoms, possible diseases are:";
+        tableDiv.style.display = "block";
+
+        // Clear previous results
+        while (tableBody.firstChild) {
+          tableBody.removeChild(tableBody.firstChild);
+        }
+
+        // Populate the table with matched diseases and probabilities
+        matchedDiseases.forEach(function (matchedDisease) {
+          var row = tableBody.insertRow();
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          cell1.innerHTML = matchedDisease.name;
+          cell2.innerHTML = matchedDisease.probability + "%";
+        });
+      } else {
+        resultDiv.innerHTML = "No matching diseases found.";
+        tableDiv.style.display = "none";
+      }
+    }
+  </script>
+</body>
+
+</html>
