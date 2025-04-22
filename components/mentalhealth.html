@@ -12,8 +12,13 @@
       background-color: #b6fffa;
     }
 
-    #nav {
-      background-color: #04364a !important;
+    #home {
+      background-color: #d2e0fb;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      margin: 20px auto;
+      max-width: 800px;
     }
 
     h1 {
@@ -301,6 +306,36 @@
       width: 0%;
       transition: width 0.3s ease;
     }
+    body {
+      background-color: #b6fffa;
+    }
+        .dashboard-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .dashboard-container .card {
+            width: 18rem;
+            margin: 10px;
+        }
+        .nav-underline .nav-link.active {
+            border-bottom: 2px solid #007bff;
+        }
+        .nav-underline .nav-link:hover {
+            border-bottom: 2px solid #007bff;
+        }
+        .nav-underline .dropdown-menu {
+            border: 1px solid #007bff;
+        }
+        .health-widget {
+    width: 18rem;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #d2e0fb;
+}
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -310,7 +345,7 @@
 <body>
   <nav class="navbar navbar-expand-lg bg-body-tertiary nav-underline" id="nav">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">MediConnect</a>
+      <a class="navbar-brand" href="../main.html">MediConnect</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -321,21 +356,21 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="components/about.html">About Us</a>
+            <a class="nav-link" href="about.html">About Us</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Services
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="components/mentalhealth.html">Mental Health</a></li>
-              <li><a class="dropdown-item" href="components/symptom.html">Symptom Checker</a></li>
-              <li><a class="dropdown-item" href="components/data.html">Health Data</a></li>
-              <li><a class="dropdown-item" href="components/meal.html">Nutrition Planning</a></li>
+              <li><a class="dropdown-item" href="mentalhealth.html">Mental Health</a></li>
+              <li><a class="dropdown-item" href="symptom.html">Symptom Checker</a></li>
+              <li><a class="dropdown-item" href="data.html">Health Data</a></li>
+              <li><a class="dropdown-item" href="meal.html">Nutrition Planning</a></li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
-              <li><a class="dropdown-item" href="components/about.html">Contact Us</a></li>
+              <li><a class="dropdown-item" href="about.html">Contact Us</a></li>
             </ul>
           </li>
         </ul>
@@ -344,10 +379,10 @@
           <button class="btn btn-outline-success" type="submit">
             Search
           </button>
-          <a href="components/login.html"><button type="button" class="btn btn-primary" style="margin-left: 10px;">
+          <a href="login.html"><button type="button" class="btn btn-primary" style="margin-left: 10px;">
             Login
           </button></a>
-          <a href="components/signup.html"><button type="button" class="btn btn-success" style="margin-left: 10px;">SignUp</button></a>
+          <a href="signup.html"><button type="button" class="btn btn-success" style="margin-left: 10px;">SignUp</button></a>
         </form>
       </div>
     </div>

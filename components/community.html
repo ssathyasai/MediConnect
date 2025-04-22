@@ -11,11 +11,6 @@
     body {
       background-color: #b6fffa;
     }
-
-    #nav {
-      background-color: #04364a !important;
-    }
-
     h1 {
       font-family: "Cabin", sans-serif;
       text-align: center;
@@ -156,11 +151,10 @@
         #quiz-container {
             margin-top: 20px;
             font-family: 'Ubuntu', sans-serif;
-      text-align: center;
-      color: #363062;
-      padding: 10px;
-      font-size: 20px;
-
+            text-align: center;
+            color: #363062;
+            padding: 10px;
+            font-size: 20px;
         }
 
         label {
@@ -248,7 +242,10 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-
+        .btn {
+      border-radius: 25px;
+      font-weight: 600;
+    }
         input[type="submit"] {
             padding: 10px 15px;
             background-color: #333;
@@ -257,6 +254,55 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        .dashboard-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .dashboard-container .card {
+            width: 18rem;
+            margin: 10px;
+        }
+        .nav-underline .nav-link.active {
+            border-bottom: 2px solid #007bff;
+        }
+        .nav-underline .nav-link:hover {
+            border-bottom: 2px solid #007bff;
+        }
+        .nav-underline .dropdown-menu {
+            border: 1px solid #007bff;
+        }
+        body {
+      background-color: #b6fffa;
+    }
+        .dashboard-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .dashboard-container .card {
+            width: 18rem;
+            margin: 10px;
+        }
+        .nav-underline .nav-link.active {
+            border-bottom: 2px solid #007bff;
+        }
+        .nav-underline .nav-link:hover {
+            border-bottom: 2px solid #007bff;
+        }
+        .nav-underline .dropdown-menu {
+            border: 1px solid #007bff;
+        }
+        .health-widget {
+    width: 18rem;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #d2e0fb;
+}
   </style>
  <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -273,7 +319,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="../main.html">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="components/about.html">About Us</a>
