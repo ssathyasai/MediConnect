@@ -162,62 +162,73 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-    <script>
-
-    var healthData = [];
-
-    function trackHealthData() {
-        // Track health data and update the dashboard and table
-        var weight = document.getElementById('weight').value;
-        var bloodPressure = document.getElementById('bloodPressure').value;
-        var heartRate = document.getElementById('heartRate').value;
-        var sleepPatterns = document.getElementById('sleepPatterns').value;
-
-        if (!weight || !bloodPressure || !heartRate || !sleepPatterns) {
-            alert("Please fill in all fields.");
-            return;
-        }
-
-        var entry = {
-            weight: parseFloat(weight),
-            bloodPressure: bloodPressure,
-            heartRate: parseFloat(heartRate),
-            sleepPatterns: sleepPatterns
-        };
-
-        healthData.push(entry);
-        updateDashboardValues();
-        updateHealthTable();
-
-        document.getElementById('trackingForm').reset();
-    }
-
-    function updateDashboardValues() {
-        document.getElementById('weightValue').innerText = healthData.length > 0 ? healthData[healthData.length - 1].weight : 'N/A';
-        document.getElementById('bloodPressureValue').innerText = healthData.length > 0 ? healthData[healthData.length - 1].bloodPressure : 'N/A';
-        document.getElementById('heartRateValue').innerText = healthData.length > 0 ? healthData[healthData.length - 1].heartRate : 'N/A';
-        document.getElementById('sleepPatternsValue').innerText = healthData.length > 0 ? healthData[healthData.length - 1].sleepPatterns : 'N/A';
-    }
-
-    function updateHealthTable() {
-        var tableBody = document.getElementById('healthTableBody');
-        // Clear existing rows
-        tableBody.innerHTML = '';
-
-        // Populate the table with health data
-        healthData.forEach(function (entry, index) {
-            var row = document.createElement('tr');
-            row.innerHTML = `
-                <th scope="row">${index + 1}</th>
-                <td>${entry.weight}</td>
-                <td>${entry.bloodPressure}</td>
-                <td>${entry.heartRate}</td>
-                <td>${entry.sleepPatterns}</td>
-            `;
-            tableBody.appendChild(row);
-        });
-    }
-</script>
+        <script>
+            var healthData = [];
+        
+            function trackHealthData() {
+                var weight = document.getElementById('weight').value;
+                var bloodPressure = document.getElementById('bloodPressure').value;
+                var heartRate = document.getElementById('heartRate').value;
+                var sleepPatterns = document.getElementById('sleepPatterns').value;
+        
+                if (!weight || !bloodPressure || !heartRate || !sleepPatterns) {
+                    alert("Please fill in all fields.");
+                    return;
+                }
+        
+                var entry = {
+                    weight: parseFloat(weight),
+                    bloodPressure: bloodPressure,
+                    heartRate: parseFloat(heartRate),
+                    sleepPatterns: sleepPatterns
+                };
+        
+                healthData.push(entry);
+                updateDashboardValues();
+                updateHealthTable();
+                document.getElementById('trackingForm').reset();
+        
+                // 🔗 Send to backend
+                fetch('http://localhost:1234/saveHealthData', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(entry)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Data saved to MongoDB:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }
+        
+            function updateDashboardValues() {
+                let latest = healthData[healthData.length - 1] || {};
+                document.getElementById('weightValue').innerText = latest.weight || 'N/A';
+                document.getElementById('bloodPressureValue').innerText = latest.bloodPressure || 'N/A';
+                document.getElementById('heartRateValue').innerText = latest.heartRate || 'N/A';
+                document.getElementById('sleepPatternsValue').innerText = latest.sleepPatterns || 'N/A';
+            }
+        
+            function updateHealthTable() {
+                var tableBody = document.getElementById('healthTableBody');
+                tableBody.innerHTML = '';
+                healthData.forEach(function (entry, index) {
+                    var row = document.createElement('tr');
+                    row.innerHTML = `
+                        <th scope="row">${index + 1}</th>
+                        <td>${entry.weight}</td>
+                        <td>${entry.bloodPressure}</td>
+                        <td>${entry.heartRate}</td>
+                        <td>${entry.sleepPatterns}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+        </script>        
 
 </body>
 
