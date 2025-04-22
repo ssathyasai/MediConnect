@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediConnect</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <style>
+    body {
+      background-color: #b6fffa;
+    }
+
+    #nav {
+      background-color: #04364a !important;
+    }
+
+    h1 {
+      font-family: "Cabin", sans-serif;
+      text-align: center;
+      color: #04364a;
+    }
+
+    h3 {
+      font-family: 'Anton', sans-serif;
+      font-size: 2rem;
+      text-align: center;
+      font-weight: 800;
+      color: #363062;
+    }
+
+    .paddin {
+      padding: 10px !important;
+      justify-content: space-evenly;
+    }
+
+    #trans1 {
+      transition: transform 0.3s !important;
+      background-color: #d2e0fb !important;
+    }
+
+    #trans1:hover {
+      transform: scale(1.1) !important;
+    }
+
+    #trans2 {
+      transition: transform 0.3s !important;
+      background-color: #d2e0fb !important;
+    }
+
+    #trans2:hover {
+      transform: scale(1.1) !important;
+    }
+
+    #trans3 {
+      transition: transform 0.3s !important;
+      background-color: #d2e0fb !important;
+    }
+
+    #trans3:hover {
+      transform: scale(1.1) !important;
+    }
+
+    #trans4 {
+      transition: transform 0.3s !important;
+      background-color: #d2e0fb !important;
+    }
+
+    #trans4:hover {
+      transform: scale(1.1) !important;
+    }
+
+    #trans5 {
+      transition: transform 0.3s !important;
+      background-color: #d2e0fb !important;
+    }
+
+    #trans5:hover {
+      transform: scale(1.1) !important;
+    }
+
+    #trans6 {
+      transition: transform 0.3s !important;
+      background-color: #d2e0fb !important;
+    }
+
+    #trans6:hover {
+      transform: scale(1.1) !important;
+    }
+
+    #trans7 {
+      transition: transform 0.3s !important;
+      background-color: #d2e0fb !important;
+    }
+
+    #trans7:hover {
+      transform: scale(1.1) !important;
+    }
+
+    #trans8 {
+      transition: transform 0.3s !important;
+      background-color: #d2e0fb !important;
+    }
+
+    #trans8:hover {
+      transform: scale(1.1) !important;
+    }
+
+    .pp {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 400;
+    }
+
+    #h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 50px;
+    }
+
+    #pa {
+      display: inline-block;
+      color: #7D7C7C;
+      font-family: 'Dancing Script', cursive;
+      font-weight: 600;
+      font-size: 20px;
+    }
+
+    .paa {
+      font-family: 'Dancing Script', cursive;
+      font-weight: 600;
+      font-size: 20px;
+      margin: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    section {
+      margin: 20px;
+      padding: 20px;
+      background-color: #d2e0fb;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    /* Updated Quiz Styling with Pink Colors */
+    #quiz-container {
+      margin-top: 20px;
+      font-family: 'Ubuntu', sans-serif;
+      background-color: #fff0f5; /* Light pink background */
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .question {
+      margin-bottom: 30px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+      border-left: 5px solid #ff69b4; /* Hot pink border */
+    }
+
+    .question:hover {
+      transform: translateY(-5px);
+    }
+
+    .question p {
+      color: #d81b60; /* Pink text for questions */
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-left: 20px;
+    }
+
+    .options label {
+      margin: 8px 0;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      width: 100%;
+      padding: 8px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .options label:hover {
+      background-color: rgba(255, 105, 180, 0.1); /* Light pink hover */
+    }
+
+    .options input[type="radio"] {
+      margin-right: 10px;
+      accent-color: #ff69b4; /* Hot pink radio buttons */
+      height: 16px;
+      width: 16px;
+    }
+
+    #result-container {
+      background-color: #fff0f5; /* Light pink background */
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    #result-message {
+      font-size: 20px;
+      color: #d81b60; /* Pink text */
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    #resources-message {
+      font-size: 18px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    #start-quiz {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 25px;
+      font-size: 18px;
+      background-color: #ff69b4; /* Hot pink button */
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #start-quiz:hover {
+      background-color: #d81b60; /* Darker pink on hover */
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+    }
+
+    #quiz-container button {
+      display: block;
+      margin: 30px auto 10px;
+      padding: 12px 30px;
+      font-size: 18px;
+      background-color: #ff69b4; /* Hot pink button */
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #quiz-container button:hover {
+      background-color: #d81b60; /* Darker pink on hover */
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+    }
+
+    /* Progress bar for quiz */
+    .progress-container {
+      width: 100%;
+      height: 8px;
+      background-color: #ffe4e1; /* Misty rose background */
+      border-radius: 4px;
+      margin-bottom: 25px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background-color: #ff69b4; /* Hot pink progress */
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cabin:wght@600&family=Cinzel:wght@800&family=Dancing+Script&family=Gabarito&family=Inconsolata&family=Libre+Baskerville:wght@700&family=Nosifer&family=Nunito:wght@300&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary nav-underline" id="nav">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">MediConnect</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="components/about.html">About Us</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Services
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="components/mentalhealth.html">Mental Health</a></li>
+              <li><a class="dropdown-item" href="components/symptom.html">Symptom Checker</a></li>
+              <li><a class="dropdown-item" href="components/data.html">Health Data</a></li>
+              <li><a class="dropdown-item" href="components/meal.html">Nutrition Planning</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" href="components/about.html">Contact Us</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit">
+            Search
+          </button>
+          <a href="components/login.html"><button type="button" class="btn btn-primary" style="margin-left: 10px;">
+            Login
+          </button></a>
+          <a href="components/signup.html"><button type="button" class="btn btn-success" style="margin-left: 10px;">SignUp</button></a>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <section id="home">
+    <h2 style="text-align: center;">Welcome to Your Mental Health Hub</h2>
+    <p class="paa">Your source for information, support, and wellness. Your Mental Health Hub is a compassionate and informative space dedicated to supporting your well-being. We understand that mental health is an integral part of overall health, and our goal is to provide resources and assistance to help you navigate your journey towards mental well-being.
+      Explore a wealth of information on various mental health conditions, their symptoms, and evidence-based treatments. Our team of experts is committed to delivering content that is not only educational but also empathetic and supportive.
+      Whether you're seeking information for yourself or a loved one, we strive to create a community that fosters understanding and reduces the stigma associated with mental health challenges. You are not alone on this journey, and we are here to offer guidance, encouragement, and practical tools to help you lead a healthier and happier life.
+      Take advantage of our interactive features, such as self-assessment tools, mood trackers, and mindfulness exercises, designed to empower you in managing your mental well-being. Connect with others through our community forum, where you can share your experiences, ask questions, and find support from a community that cares.
+      Your mental health matters, and we are honored to be part of your support network. Remember, seeking help is a sign of strength, and we encourage you to reach out to professionals if needed. Together, we can create a world where mental health is prioritized and celebrated.
+      Thank you for choosing Your Mental Health Hub as your resource for information, support, and wellness. Let's embark on this journey towards mental well-being together.</p>
+  </section>
+  <header>
+    <h1>Mental Health Quiz</h1>
+  </header>
+
+  <!-- Quiz Section -->
+  <section>
+    <h2 style="text-align: center; color: #d81b60; margin-bottom: 20px;">Take the Mental Health Quiz</h2>
+    <p class="paa" style="text-align: center;">This quiz is designed to help you assess your mental health. Answer the following questions honestly and choose the option that best describes your feelings to help us understand where you are in your mental health journey.</p>
+
+    <!-- Quiz Container -->
+    <div id="quiz-container">
+      <!-- Progress bar will be added here -->
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <!-- Questions will be dynamically added here using JavaScript -->
+    </div>
+
+    <!-- Result Container -->
+    <div id="result-container" style="display: none;">
+      <h2 style="color: #d81b60; margin-bottom: 25px;">Your Mental Health Assessment</h2>
+      <p id="result-message"></p>
+      <p id="resources-message"></p>
+      <button id="retake-quiz" class="btn" style="background-color: #ff69b4; color: white; margin-top: 20px;">Retake Quiz</button>
+    </div>
+
+    <!-- Start Quiz Button -->
+    <button id="start-quiz" class="btn">Start Quiz</button>
+  </section>
+
+  <!-- JavaScript -->
+  <script>
+    // Quiz Questions and Answers
+    const questions = [
+      "How often do you feel overwhelmed by daily tasks?",
+      "Do you experience changes in appetite or weight?",
+      "How would you rate your quality of sleep?",
+      "Do you often feel fatigued or lacking in energy?",
+      "Have you noticed changes in your concentration or decision-making ability?",
+      "How often do you experience feelings of sadness or hopelessness?",
+      "Do you find less pleasure in activities that you used to enjoy?",
+      "How would you describe your overall mood?",
+      "Have you had thoughts of self-harm or suicide?",
+      "How would you rate your level of stress?",
+      "Do you find it easy to relax and unwind?",
+      "How often do you engage in physical activity?",
+      "How satisfied are you with your personal relationships?",
+      "Do you have a support system in place (friends, family, etc.)?",
+      "How would you rate your work-life balance?",
+      "Do you practice any mindfulness or relaxation techniques?",
+      "How often do you engage in activities that bring you joy?",
+      "Have you experienced a traumatic event recently?",
+      "How would you rate your self-esteem?",
+      // Add more questions as needed
+    ];
+
+    // Function to display quiz questions
+    function displayQuestions() {
+      const quizContainer = document.getElementById('quiz-container');
+      const startButton = document.getElementById('start-quiz');
+      const resultContainer = document.getElementById('result-container');
+      
+      // Clear any existing content
+      quizContainer.innerHTML = '';
+      
+      // Add progress bar
+      const progressContainer = document.createElement('div');
+      progressContainer.classList.add('progress-container');
+      const progressBar = document.createElement('div');
+      progressBar.classList.add('progress-bar');
+      progressBar.id = 'progress-bar';
+      progressContainer.appendChild(progressBar);
+      quizContainer.appendChild(progressContainer);
+
+      startButton.style.display = 'none';
+      resultContainer.style.display = 'none';
+
+      // Display only the first question initially
+      let currentQuestion = 0;
+      displayQuestion(currentQuestion);
+
+      function displayQuestion(index) {
+        // Update progress bar
+        const progressPercentage = (index / questions.length) * 100;
+        document.getElementById('progress-bar').style.width = `${progressPercentage}%`;
+        
+        // Clear previous question
+        quizContainer.innerHTML = '';
+        quizContainer.appendChild(progressContainer);
+        
+        // Create question element
+        const questionDiv = document.createElement('div');
+        questionDiv.classList.add('question');
+        questionDiv.innerHTML = `<p>${index + 1}. ${questions[index]}</p>`;
+        
+        const options = ['Not at all', 'Sometimes', 'Often', 'Always'];
+        const optionsDiv = document.createElement('div');
+        optionsDiv.classList.add('options');
+
+        options.forEach((option) => {
+          const label = document.createElement('label');
+          const radio = document.createElement('input');
+          radio.type = 'radio';
+          radio.name = `q${index}`;
+          radio.value = option;
+          
+          // Add event listener to move to next question when option is selected
+          radio.addEventListener('change', function() {
+            setTimeout(() => {
+              if (index < questions.length - 1) {
+                displayQuestion(index + 1);
+              } else {
+                showResults();
+              }
+            }, 300); // Slight delay for better UX
+          });
+          
+          label.appendChild(radio);
+          label.appendChild(document.createTextNode(option));
+          optionsDiv.appendChild(label);
+        });
+
+        questionDiv.appendChild(optionsDiv);
+        quizContainer.appendChild(questionDiv);
+        
+        // Add next/submit button
+        const actionButton = document.createElement('button');
+        
+        if (index < questions.length - 1) {
+          actionButton.textContent = 'Skip Question';
+          actionButton.addEventListener('click', () => displayQuestion(index + 1));
+        } else {
+          actionButton.textContent = 'Submit Quiz';
+          actionButton.addEventListener('click', showResults);
+        }
+        
+        quizContainer.appendChild(actionButton);
+      }
+    }
+
+    // Function to calculate and display quiz results
+    function showResults() {
+      const quizContainer = document.getElementById('quiz-container');
+      const resultContainer = document.getElementById('result-container');
+      const resultMessage = document.getElementById('result-message');
+      const resourcesMessage = document.getElementById('resources-message');
+
+      const totalQuestions = questions.length;
+      let score = 0;
+      let answeredQuestions = 0;
+
+      for (let i = 0; i < totalQuestions; i++) {
+        const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selectedOption) {
+          answeredQuestions++;
+          const selectedValue = selectedOption.value;
+          // Customize scoring based on your criteria
+          if (selectedValue === 'Not at all') score += 0;
+          else if (selectedValue === 'Sometimes') score += 1;
+          else if (selectedValue === 'Often') score += 2;
+          else if (selectedValue === 'Always') score += 3;
+        }
+      }
+
+      // Calculate percentage score based on answered questions
+      const maxPossibleScore = answeredQuestions * 3;
+      const scorePercentage = maxPossibleScore > 0 ? (score / maxPossibleScore) * 100 : 0;
+
+      // Customize the result message based on the score percentage
+      let resultMsg = '';
+      let resourcesMsg = '';
+
+      if (scorePercentage <= 25) {
+        resultMsg = "Your mental health appears to be in a good state.";
+        resourcesMsg = "Continue practicing self-care and mindfulness. It's always beneficial to maintain healthy habits and stay connected with your support network.";
+      } else if (scorePercentage <= 50) {
+        resultMsg = "You may be experiencing some mild stress or challenges.";
+        resourcesMsg = "Consider incorporating more self-care practices into your routine, such as regular exercise, adequate sleep, and relaxation techniques. Talking to friends or family about your feelings can also be helpful.";
+      } else if (scorePercentage <= 75) {
+        resultMsg = "Your responses suggest you might be facing moderate challenges affecting your mental wellbeing.";
+        resourcesMsg = "Consider reaching out to a mental health professional for support. Remember that seeking help is a sign of strength, not weakness. In the meantime, focus on self-care activities and connect with supportive people in your life.";
+      } else {
+        resultMsg = "Your responses indicate you may be experiencing significant challenges.";
+        resourcesMsg = "We strongly recommend connecting with a mental health professional who can provide appropriate support and guidance. Remember, you don't have to face these challenges alone, and help is available.";
+      }
+
+      // Add a note about incomplete answers if applicable
+      if (answeredQuestions < totalQuestions) {
+        resourcesMsg += " Note: You skipped some questions. For a more accurate assessment, consider retaking the quiz and answering all questions.";
+      }
+
+      quizContainer.style.display = 'none';
+      resultContainer.style.display = 'block';
+      resultMessage.textContent = resultMsg;
+      resourcesMessage.textContent = resourcesMsg;
+      
+      // Add event listener to retake quiz button
+      document.getElementById('retake-quiz').addEventListener('click', function() {
+        resultContainer.style.display = 'none';
+        displayQuestions();
+      });
+    }
+
+    // Event listener to start the quiz
+    document.getElementById('start-quiz').addEventListener('click', displayQuestions);
+  </script>
+  <section id="personal-stories" class="py-5">
+    <div class="container">
+      <h2>Personal Stories and Testimonials</h2>
+      <p>Discover the inspiring journeys of individuals who have faced mental health challenges and emerged stronger. These personal stories aim to break down the stigma associated with mental health and offer hope and support to those on a similar path.</p>
+
+      <!-- Personal Story 1 -->
+      <div class="personal-story">
+        <div class="row">
+          <div class="col-md-4">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sarah's Photo" class="img-fluid rounded-circle" style="height: 60%;width: 50%;">
+          </div>
+          <div class="col-md-8">
+            <h3>From Darkness to Light: My Journey to Mental Wellness</h3>
+            <p>Meet Sarah, a courageous individual who battled depression and anxiety for years. In her heartfelt narrative, she shares the ups and downs of her mental health journey and the strategies that ultimately led her to a place of healing.</p>
+            <p><em>"Reaching out for help was the hardest, but most rewarding, decision I ever made. Today, I am living proof that with the right support and determination, you can overcome any obstacle."</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal Story 2 -->
+      <div class="personal-story">
+        <div class="row">
+          <div class="col-md-4">
+            <img src="https://images.unsplash.com/photo-1500048993953-d23a436266cf?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="John's Photo" class="img-fluid rounded-circle" style="height: 70%;width: 50%;">
+          </div>
+          <div class="col-md-8">
+            <h3>Breaking the Silence: A Story of Resilience</h3>
+            <p>John's story is one of resilience and strength. Having faced the challenges of bipolar disorder, he opens up about the importance of seeking professional help, building a support system, and embracing self-care practices.</p>
+            <p><em>"Sharing my story is my way of letting others know that they are not alone. Mental health is a journey, and each step forward is a victory worth celebrating."</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal Story 3 (You can add more stories similarly) -->
+      <div class="personal-story">
+        <div class="row">
+          <div class="col-md-4">
+            <img src="https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?q=80&w=1776&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Emily's Photo" class="img-fluid rounded-circle" style="height: 70%;width: 50%;">
+          </div>
+          <div class="col-md-8">
+            <h3>Finding Strength in Vulnerability: Emily's Story</h3>
+            <p>Emily shares her journey of overcoming anxiety and panic attacks. Through therapy and self-discovery, she found strength in vulnerability and learned to embrace her true self.</p>
+            <p><em>"Accepting my vulnerabilities was the turning point. Today, I am living authentically, and my mental health journey has become a source of strength."</em></p>
+          </div>
+        </div>
+      </div>
+
+      <p>These personal stories and testimonials are shared with the intention of fostering understanding, empathy, and support. Remember, seeking help is a sign of strength, and there is a community ready to stand by you on your path to mental wellness.</p>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
