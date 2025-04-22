@@ -12,11 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-const mongodb_uri = "mongodb+srv://harinivas_28:mongo_harinvas@cluster0.cikhuki.mongodb.net/healthDB?retryWrites=true&w=majority&appName=Cluster0";
-mongoose.connect(mongodb_uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+const mongodb_uri = "mongodb+srv://username:password@cluster0.cikhuki.mongodb.net/healthDB?retryWrites=true&w=majority&appName=Cluster0"
+mongoose.connect(mongodb_uri)
 .then(() => console.log("MongoDB connected!"))
 .catch(err => console.error("MongoDB connection error:", err));
 
