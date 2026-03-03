@@ -1,7 +1,9 @@
 {
   "name": "mediconnect-frontend",
   "version": "1.0.0",
+  "homepage": "https://mediconnect-frontend.onrender.com",
   "private": true,
+  "proxy": "https://mediconnect-txt0.onrender.com",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

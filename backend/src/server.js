@@ -1,4 +1,3 @@
-// backend/src/server.js
 require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
 
 const express = require('express');
@@ -6,17 +5,29 @@ const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const healthDataRoutes = require('./routes/healthDataRoutes');
 
-console.log('🚀 Server starting...');
-console.log('PORT:', process.env.PORT);
-console.log('SUPABASE_URL configured:', !!process.env.SUPABASE_URL);
-
 const app = express();
 
-// Middleware
+// Update CORS to allow your frontend domains
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://mediconnect-frontend.onrender.com',  // Add your frontend URL after deploying
+  'https://mediconnect-txt0.onrender.com'
+];
+
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy does not allow access from this origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   credentials: true
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -33,12 +44,6 @@ app.get('/test', (req, res) => {
       supabaseConfigured: !!process.env.SUPABASE_URL
     }
   });
-});
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error('❌ Error:', err.stack);
-  res.status(500).json({ message: 'Something went wrong!' });
 });
 
 const PORT = process.env.PORT || 1234;
