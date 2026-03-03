@@ -1,0 +1,94 @@
+body {
+    background-color: #b6fffa;
+    margin: 0;
+    padding: 0;
+}
+
+#nav {
+    background-color: #04364a !important;
+}
+
+h1 {
+    font-family: "Cabin", sans-serif;
+    text-align: center;
+    color: #04364a;
+}
+
+h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 800;
+    color: #363062;
+}
+
+.main-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.main-tagline {
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.feature-card {
+    background-color: #d2e0fb;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.feature-card:hover {
+    transform: scale(1.05);
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #04364a;
+}
+
+.feature-card p {
+    font-family: 'Nunito', sans-serif;
+    color: #666;
+}
+
+.welcome-user {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: rgba(210, 224, 251, 0.5);
+    border-radius: 10px;
+}
+
+.welcome-user h2 {
+    color: #363062;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+}
+
+.btn {
+    border-radius: 25px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}

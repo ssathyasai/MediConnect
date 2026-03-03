@@ -1,110 +1,99 @@
-import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react';
+import NavigationBar from './Navbar';
+import '../styles/community.css';
 
-const Community = () => {
-  const [messages, setMessages] = useState([]);
-  const [userName, setUserName] = useState('');
-  const [message, setMessage] = useState('');
-  const [nameSet, setNameSet] = useState(false);
+const Community = ({ isLoggedIn, user, onLogout }) => {
+    const [messages, setMessages] = useState([]);
+    const [userName, setUserName] = useState('');
+    const [messageInput, setMessageInput] = useState('');
+    const [nameSet, setNameSet] = useState(false);
 
-  // Load messages from localStorage on component mount
-  useEffect(() => {
-    const savedMessages = localStorage.getItem('communityMessages');
-    if (savedMessages) {
-      setMessages(JSON.parse(savedMessages));
-    }
-  }, []);
+    const handleNameSubmit = (e) => {
+        e.preventDefault();
+        if (userName.trim()) {
+            setNameSet(true);
+        }
+    };
 
-  // Save messages to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem('communityMessages', JSON.stringify(messages));
-  }, [messages]);
+    const handleMessageSubmit = (e) => {
+        e.preventDefault();
+        if (messageInput.trim()) {
+            const newMessage = {
+                user: userName,
+                text: messageInput,
+                timestamp: new Date().toLocaleTimeString()
+            };
+            setMessages([...messages, newMessage]);
+            setMessageInput('');
+        }
+    };
 
-  const handleNameSubmit = (e) => {
-    e.preventDefault();
-    if (userName.trim()) {
-      setNameSet(true);
-    }
-  };
-
-  const handleMessageSubmit = (e) => {
-    e.preventDefault();
-    if (message.trim()) {
-      const newMessage = {
-        id: Date.now(),
-        user: userName,
-        text: message,
-        timestamp: new Date().toLocaleTimeString()
-      };
-      setMessages([...messages, newMessage]);
-      setMessage('');
-    }
-  };
-
-  return (
-    <div className="container py-4">
-      <h1 className="text-center mb-4" style={{ color: '#04364a', fontFamily: 'Cabin, sans-serif' }}>
-        Community Chat
-      </h1>
-      
-      <div className="row justify-content-center">
-        <div className="col-md-8">
-          <div className="card shadow" style={{ backgroundColor: '#d2e0fb' }}>
-            <div className="card-body">
-              {!nameSet ? (
-                <form onSubmit={handleNameSubmit} className="mb-3">
-                  <div className="input-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Enter your name to join the chat"
-                      value={userName}
-                      onChange={(e) => setUserName(e.target.value)}
-                    />
-                    <button className="btn btn-primary" type="submit">Join Chat</button>
-                  </div>
-                </form>
-              ) : (
-                <>
-                  <div className="mb-3">
-                    <div className="bg-light p-3 rounded" style={{ maxHeight: '400px', overflowY: 'auto' }}>
-                      {messages.length === 0 ? (
-                        <p className="text-muted text-center">No messages yet. Start the conversation!</p>
-                      ) : (
-                        messages.map((msg) => (
-                          <div key={msg.id} className="mb-2 p-2 rounded" style={{ 
-                            backgroundColor: msg.user === userName ? '#cce5ff' : '#f8f9fa',
-                            marginLeft: msg.user === userName ? '20%' : '0',
-                            marginRight: msg.user === userName ? '0' : '20%'
-                          }}>
-                            <strong>{msg.user}:</strong> {msg.text}
-                            <small className="text-muted d-block">{msg.timestamp}</small>
-                          </div>
-                        ))
-                      )}
-                    </div>
-                  </div>
-                  
-                  <form onSubmit={handleMessageSubmit}>
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Type your message..."
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                      />
-                      <button className="btn btn-success" type="submit">Send</button>
-                    </div>
-                  </form>
-                </>
-              )}
+    return (
+        <>
+            <NavigationBar isLoggedIn={isLoggedIn} user={user} onLogout={onLogout} />
+            
+            <div className="community-container">
+                <h1>Community Chat</h1>
+                
+                <div id="chat-container" className="chat-container">
+                    {!nameSet ? (
+                        <div className="name-section">
+                            <form onSubmit={handleNameSubmit} id="name-form">
+                                <input
+                                    type="text"
+                                    id="user-input"
+                                    placeholder="Enter Your Name"
+                                    value={userName}
+                                    onChange={(e) => setUserName(e.target.value)}
+                                />
+                                <button type="submit">Join Chat</button>
+                            </form>
+                        </div>
+                    ) : (
+                        <>
+                            <div className="chat-header">
+                                <h3>Welcome, {userName}!</h3>
+                            </div>
+                            
+                            <div className="messages-section">
+                                <ul id="message-list" className="message-list">
+                                    {messages.map((msg, index) => (
+                                        <li key={index} className="message">
+                                            <strong>{msg.user}</strong> [{msg.timestamp}]: {msg.text}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            
+                            <div className="message-input-section">
+                                <form onSubmit={handleMessageSubmit} id="message-form">
+                                    <input
+                                        type="text"
+                                        id="message-input"
+                                        placeholder="Enter your message..."
+                                        value={messageInput}
+                                        onChange={(e) => setMessageInput(e.target.value)}
+                                    />
+                                    <button type="submit">Send</button>
+                                </form>
+                            </div>
+                        </>
+                    )}
+                </div>
+                
+                <div className="community-guidelines">
+                    <h3>Community Guidelines</h3>
+                    <ul>
+                        <li>Be respectful and kind to others</li>
+                        <li>No medical advice - share experiences only</li>
+                        <li>Protect your privacy - don't share personal information</li>
+                        <li>Report inappropriate behavior</li>
+                        <li>Seek professional help for medical emergencies</li>
+                    </ul>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+        </>
+    );
 };
 
 export default Community;

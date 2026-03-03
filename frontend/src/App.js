@@ -1,82 +1,106 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import Main from './pages/Main';
 import About from './components/About';
 import Community from './components/Community';
-import HealthData from './components/Data';
+import Data from './components/Data';
 import Login from './components/Login';
 import Meal from './components/Meal';
 import MentalHealth from './components/MentalHealth';
 import Signup from './components/Signup';
 import Symptom from './components/Symptom';
-import Main from './pages/Main';
-import { api } from './services/supabaseClient';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
 
 function App() {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    // Check if user is logged in
-    const token = localStorage.getItem('token');
-    const storedUser = localStorage.getItem('user');
-    
-    if (token && storedUser) {
-      setUser(JSON.parse(storedUser));
-      
-      // Verify token with backend
-      api.get('/me')
-        .then(data => {
-          setUser(data.user);
-          localStorage.setItem('user', JSON.stringify(data.user));
-        })
-        .catch(() => {
-          // Token invalid, clear storage
-          localStorage.removeItem('token');
-          localStorage.removeItem('user');
-          setUser(null);
-        })
-        .finally(() => setLoading(false));
-    } else {
-      setLoading(false);
-    }
-  }, []);
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        const savedUser = localStorage.getItem('user');
+        if (token && savedUser) {
+            setIsLoggedIn(true);
+            setUser(JSON.parse(savedUser));
+        }
+    }, []);
 
-  const handleLogin = (userData) => {
-    setUser(userData);
-  };
+    const handleLogin = (userData) => {
+        setIsLoggedIn(true);
+        setUser(userData);
+    };
 
-  const handleLogout = () => {
-    setUser(null);
-  };
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        setUser(null);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+    };
 
-  if (loading) {
     return (
-      <div className="d-flex justify-content-center align-items-center vh-100">
-        <div className="spinner-border text-primary" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={
+                    <Main 
+                        isLoggedIn={isLoggedIn} 
+                        user={user} 
+                        onLogout={handleLogout} 
+                    />
+                } />
+                <Route path="/about" element={
+                    <About 
+                        isLoggedIn={isLoggedIn} 
+                        user={user} 
+                        onLogout={handleLogout} 
+                    />
+                } />
+                <Route path="/community" element={
+                    <Community 
+                        isLoggedIn={isLoggedIn} 
+                        user={user} 
+                        onLogout={handleLogout} 
+                    />
+                } />
+                <Route path="/data" element={
+                    <Data 
+                        isLoggedIn={isLoggedIn} 
+                        user={user} 
+                        onLogout={handleLogout} 
+                    />
+                } />
+                <Route path="/login" element={
+                    isLoggedIn ? 
+                    <Navigate to="/" /> : 
+                    <Login onLogin={handleLogin} />
+                } />
+                <Route path="/meal" element={
+                    <Meal 
+                        isLoggedIn={isLoggedIn} 
+                        user={user} 
+                        onLogout={handleLogout} 
+                    />
+                } />
+                <Route path="/mentalhealth" element={
+                    <MentalHealth 
+                        isLoggedIn={isLoggedIn} 
+                        user={user} 
+                        onLogout={handleLogout} 
+                    />
+                } />
+                <Route path="/signup" element={
+                    isLoggedIn ? 
+                    <Navigate to="/" /> : 
+                    <Signup onLogin={handleLogin} />
+                } />
+                <Route path="/symptom" element={
+                    <Symptom 
+                        isLoggedIn={isLoggedIn} 
+                        user={user} 
+                        onLogout={handleLogout} 
+                    />
+                } />
+            </Routes>
+        </Router>
     );
-  }
-
-  return (
-    <Router>
-      <Navbar user={user} onLogout={handleLogout} />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/community" element={user ? <Community /> : <Navigate to="/login" />} />
-        <Route path="/health-data" element={user ? <HealthData /> : <Navigate to="/login" />} />
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path="/nutrition" element={<Meal />} />
-        <Route path="/mental-health" element={<MentalHealth />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/symptom-checker" element={<Symptom />} />
-      </Routes>
-    </Router>
-  );
 }
 
 export default App;

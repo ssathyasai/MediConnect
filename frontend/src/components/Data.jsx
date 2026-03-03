@@ -1,209 +1,253 @@
 import React, { useState, useEffect } from 'react';
-import { api } from '../services/supabaseClient';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationBar from './Navbar';
+import axios from 'axios';
+import '../styles/data.css';
 
-const HealthData = () => {
-  const [healthData, setHealthData] = useState([]);
-  const [formData, setFormData] = useState({
-    weight: '',
-    bloodPressure: '',
-    heartRate: '',
-    sleepPatterns: ''
-  });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:1234';
 
-  useEffect(() => {
-    fetchHealthData();
-  }, []);
-
-  const fetchHealthData = async () => {
-    try {
-      setLoading(true);
-      const data = await api.get('/getHealthData');
-      setHealthData(data);
-    } catch (err) {
-      setError('Failed to fetch health data');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setSuccess('');
-    
-    if (!formData.weight || !formData.bloodPressure || !formData.heartRate || !formData.sleepPatterns) {
-      setError('Please fill all fields');
-      return;
-    }
-    
-    try {
-      setLoading(true);
-      const result = await api.post('/saveHealthData', formData);
-      
-      // Add new data to list
-      setHealthData([result.entry, ...healthData]);
-      
-      // Reset form
-      setFormData({
+const Data = ({ isLoggedIn, user, onLogout }) => {
+    const [healthData, setHealthData] = useState([]);
+    const [formData, setFormData] = useState({
         weight: '',
         bloodPressure: '',
         heartRate: '',
         sleepPatterns: ''
-      });
-      
-      setSuccess('Health data saved successfully!');
-    } catch (err) {
-      setError('Failed to save health data: ' + err.message);
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+    });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
-  const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this entry?')) return;
-    
-    try {
-      await api.delete(`/deleteHealthData/${id}`);
-      setHealthData(healthData.filter(item => item.id !== id));
-      setSuccess('Entry deleted successfully');
-    } catch (err) {
-      setError('Failed to delete entry');
-      console.error(err);
-    }
-  };
+    useEffect(() => {
+        if (isLoggedIn) {
+            fetchHealthData();
+        }
+    }, [isLoggedIn]);
 
-  return (
-    <div className="container mt-4">
-      <h2 className="mb-4">Health Data Tracker</h2>
-      
-      {error && <div className="alert alert-danger">{error}</div>}
-      {success && <div className="alert alert-success">{success}</div>}
-      
-      <div className="card mb-4">
-        <div className="card-body">
-          <h5 className="card-title">Add New Health Data</h5>
-          <form onSubmit={handleSubmit}>
-            <div className="row">
-              <div className="col-md-3 mb-3">
-                <label htmlFor="weight" className="form-label">Weight (kg)</label>
-                <input
-                  type="number"
-                  step="0.1"
-                  className="form-control"
-                  id="weight"
-                  name="weight"
-                  value={formData.weight}
-                  onChange={handleChange}
-                  placeholder="Enter weight"
-                  required
-                />
-              </div>
-              <div className="col-md-3 mb-3">
-                <label htmlFor="bloodPressure" className="form-label">Blood Pressure</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="bloodPressure"
-                  name="bloodPressure"
-                  value={formData.bloodPressure}
-                  onChange={handleChange}
-                  placeholder="e.g., 120/80"
-                  required
-                />
-              </div>
-              <div className="col-md-3 mb-3">
-                <label htmlFor="heartRate" className="form-label">Heart Rate (BPM)</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="heartRate"
-                  name="heartRate"
-                  value={formData.heartRate}
-                  onChange={handleChange}
-                  placeholder="Enter heart rate"
-                  required
-                />
-              </div>
-              <div className="col-md-3 mb-3">
-                <label htmlFor="sleepPatterns" className="form-label">Sleep Patterns</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="sleepPatterns"
-                  name="sleepPatterns"
-                  value={formData.sleepPatterns}
-                  onChange={handleChange}
-                  placeholder="e.g., 7-8 hours"
-                  required
-                />
-              </div>
+    const fetchHealthData = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.get(`${API_URL}/api/health/all`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            setHealthData(response.data);
+        } catch (err) {
+            console.error('Error fetching health data:', err);
+            setError('Failed to load health data');
+        }
+    };
+
+    const handleInputChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!isLoggedIn) {
+            alert('Please login to track health data');
+            return;
+        }
+
+        const { weight, bloodPressure, heartRate, sleepPatterns } = formData;
+        if (!weight || !bloodPressure || !heartRate || !sleepPatterns) {
+            alert('Please fill in all fields');
+            return;
+        }
+
+        setLoading(true);
+        setError('');
+
+        try {
+            const currentDate = new Date();
+            const formattedDate = currentDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const entry = {
+                weight: parseFloat(weight),
+                bloodPressure: bloodPressure,
+                heartRate: parseFloat(heartRate),
+                sleepPatterns: sleepPatterns,
+                date: formattedDate
+            };
+
+            const token = localStorage.getItem('token');
+            const response = await axios.post(`${API_URL}/api/health/save`, entry, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            if (response.data.success) {
+                setHealthData([...healthData, response.data.entry]);
+                setFormData({
+                    weight: '',
+                    bloodPressure: '',
+                    heartRate: '',
+                    sleepPatterns: ''
+                });
+                alert('Health data saved successfully!');
+            }
+        } catch (err) {
+            console.error('Error saving health data:', err);
+            setError('Failed to save health data');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const getLatestValue = (field) => {
+        if (healthData.length === 0) return 'N/A';
+        const latest = healthData[healthData.length - 1];
+        return latest[field] || 'N/A';
+    };
+
+    return (
+        <>
+            <NavigationBar isLoggedIn={isLoggedIn} user={user} onLogout={onLogout} />
+            
+            <div className="container mt-4">
+                {!isLoggedIn ? (
+                    <div className="alert alert-warning">
+                        Please login to track your health data
+                    </div>
+                ) : (
+                    <>
+                        <form onSubmit={handleSubmit} className="data-form">
+                            <h2>Track Your Health Data</h2>
+                            {error && <div className="alert alert-danger">{error}</div>}
+                            
+                            <div className="mb-3">
+                                <label htmlFor="weight" className="form-label">Weight (kg):</label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    id="weight"
+                                    name="weight"
+                                    value={formData.weight}
+                                    onChange={handleInputChange}
+                                    placeholder="Enter weight"
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-3">
+                                <label htmlFor="bloodPressure" className="form-label">Blood Pressure:</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="bloodPressure"
+                                    name="bloodPressure"
+                                    value={formData.bloodPressure}
+                                    onChange={handleInputChange}
+                                    placeholder="Enter blood pressure (e.g., 120/80)"
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-3">
+                                <label htmlFor="heartRate" className="form-label">Heart Rate (bpm):</label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    id="heartRate"
+                                    name="heartRate"
+                                    value={formData.heartRate}
+                                    onChange={handleInputChange}
+                                    placeholder="Enter heart rate"
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-3">
+                                <label htmlFor="sleepPatterns" className="form-label">Sleep Patterns (hours):</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="sleepPatterns"
+                                    name="sleepPatterns"
+                                    value={formData.sleepPatterns}
+                                    onChange={handleInputChange}
+                                    placeholder="Enter sleep hours"
+                                    required
+                                />
+                            </div>
+
+                            <button type="submit" className="btn btn-primary" disabled={loading}>
+                                {loading ? 'Saving...' : 'Save Data'}
+                            </button>
+                        </form>
+
+                        <div className="dashboard-container">
+                            <div className="card health-widget">
+                                <div className="card-body">
+                                    <h5 className="card-title">Weight</h5>
+                                    <p className="card-text">Latest: <span className="value">{getLatestValue('weight')}</span> kg</p>
+                                </div>
+                            </div>
+
+                            <div className="card health-widget">
+                                <div className="card-body">
+                                    <h5 className="card-title">Blood Pressure</h5>
+                                    <p className="card-text">Latest: <span className="value">{getLatestValue('bloodPressure')}</span></p>
+                                </div>
+                            </div>
+
+                            <div className="card health-widget">
+                                <div className="card-body">
+                                    <h5 className="card-title">Heart Rate</h5>
+                                    <p className="card-text">Latest: <span className="value">{getLatestValue('heartRate')}</span> BPM</p>
+                                </div>
+                            </div>
+
+                            <div className="card health-widget">
+                                <div className="card-body">
+                                    <h5 className="card-title">Sleep Patterns</h5>
+                                    <p className="card-text">Latest: <span className="value">{getLatestValue('sleepPatterns')}</span> Hours</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="history-section">
+                            <h3>Health Data History</h3>
+                            <table className="table table-striped">
+                                <thead className="table-primary">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Date</th>
+                                        <th>Weight (kg)</th>
+                                        <th>Blood Pressure</th>
+                                        <th>Heart Rate (BPM)</th>
+                                        <th>Sleep (Hours)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {healthData.map((entry, index) => (
+                                        <tr key={index}>
+                                            <td>{index + 1}</td>
+                                            <td>{entry.date}</td>
+                                            <td>{entry.weight}</td>
+                                            <td>{entry.bloodPressure}</td>
+                                            <td>{entry.heartRate}</td>
+                                            <td>{entry.sleepPatterns}</td>
+                                        </tr>
+                                    ))}
+                                    {healthData.length === 0 && (
+                                        <tr>
+                                            <td colSpan="6" className="text-center">No data available</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </>
+                )}
             </div>
-            <button type="submit" className="btn btn-primary" disabled={loading}>
-              {loading ? 'Saving...' : 'Save Data'}
-            </button>
-          </form>
-        </div>
-      </div>
-      
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">Health History</h5>
-          {loading && healthData.length === 0 ? (
-            <p className="text-center">Loading...</p>
-          ) : healthData.length === 0 ? (
-            <p className="text-center text-muted">No health data recorded yet.</p>
-          ) : (
-            <div className="table-responsive">
-              <table className="table table-striped table-hover">
-                <thead className="table-primary">
-                  <tr>
-                    <th>Date</th>
-                    <th>Weight (kg)</th>
-                    <th>Blood Pressure</th>
-                    <th>Heart Rate (BPM)</th>
-                    <th>Sleep Patterns</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {healthData.map((entry) => (
-                    <tr key={entry.id}>
-                      <td>{new Date(entry.recorded_at).toLocaleDateString()}</td>
-                      <td>{entry.weight}</td>
-                      <td>{entry.blood_pressure}</td>
-                      <td>{entry.heart_rate}</td>
-                      <td>{entry.sleep_patterns}</td>
-                      <td>
-                        <button 
-                          className="btn btn-sm btn-danger"
-                          onClick={() => handleDelete(entry.id)}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+        </>
+    );
 };
 
-export default HealthData;
+export default Data;
