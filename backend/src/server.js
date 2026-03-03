@@ -10,8 +10,8 @@ const app = express();
 // Update CORS to allow your frontend domains
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://mediconnect-frontend.onrender.com',  // Add your frontend URL after deploying
-  'https://mediconnect-txt0.onrender.com'
+  'https://mediconnect-frontend.onrender.com',  // Your frontend URL (update after deploying)
+  'https://mediconnect-nb0z.onrender.com'       // Your new backend
 ];
 
 app.use(cors({
@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', authRoutes);
 app.use('/', healthDataRoutes);
 
-// Test route
+// Test route (public)
 app.get('/test', (req, res) => {
   res.json({ 
     message: 'Server is running',
@@ -50,5 +50,5 @@ const PORT = process.env.PORT || 1234;
 
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
-  console.log(`📝 Test at: http://localhost:${PORT}/test`);
+  console.log(`📝 Test at: /test`);
 });

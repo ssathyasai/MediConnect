@@ -1,5 +1,5 @@
 // API service for backend communication
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:1234';
+const API_URL = process.env.REACT_APP_API_URL || 'https://mediconnect-nb0z.onrender.com';
 
 export const api = {
   async request(endpoint, options = {}) {
