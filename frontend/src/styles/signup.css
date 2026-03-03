@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: url('/images/sign.jpg');
+    background-image: url('../../public/images/sign.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;

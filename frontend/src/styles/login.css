@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('/images/7283494.jpg');
+    background-image: url('../../public/images/7283494.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
