@@ -10,7 +10,7 @@ const CONFIG = {
     // Backend API URL
     API_URL: isDevelopment 
         ? 'http://localhost:1234/api'                    // Local development
-        : 'https://mediconnect-62qf.onrender.com/api',   // Your deployed backend
+        : 'https://mediconnect-backend-zpnn.onrender.com',   // Your deployed backend
         
     // App name
     APP_NAME: 'MediConnect',
