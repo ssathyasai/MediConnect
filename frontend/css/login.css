@@ -1,0 +1,123 @@
+@import 'style.css';
+
+body {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #8DDFCB 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.login-container {
+    background: rgba(141, 223, 203, 0.95);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(4, 54, 74, 0.2);
+    backdrop-filter: blur(10px);
+    animation: slideInUp 0.6s ease;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-container h1 {
+    font-family: "Cinzel", serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    font-weight: 800;
+}
+
+.login-container input {
+    border: none;
+    margin: 10px 0;
+    padding: 15px 20px;
+    outline: none;
+    background: var(--white);
+    font-size: 1rem;
+    border-radius: 50px;
+    width: 100%;
+    transition: var(--transition);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.login-container input:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(4, 54, 74, 0.2);
+}
+
+.login-container a {
+    display: block;
+    text-align: center;
+    color: var(--primary-color);
+    text-decoration: none;
+    margin: 15px 0;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.login-container a:hover {
+    color: #052c3a;
+    text-decoration: underline;
+}
+
+.login-container button {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, var(--danger-color) 0%, #ff404f 100%);
+    color: var(--white);
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 50px;
+    transition: var(--transition);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 20px;
+}
+
+.login-container button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 83, 97, 0.3);
+}
+
+#message {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 600;
+    min-height: 24px;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(4, 54, 74, 0.1);
+}
+
+.login-footer a {
+    display: inline-block;
+    margin: 0 10px;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.login-footer a:hover {
+    transform: translateY(-2px);
+}

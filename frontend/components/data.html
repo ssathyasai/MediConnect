@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Dashboard - MediConnect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/data.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../main.html">
+                <i class="fas fa-heartbeat me-2"></i>MediConnect
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../main.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="mentalhealth.html">Mental Health</a></li>
+                            <li><a class="dropdown-item" href="symptom.html">Symptom Checker</a></li>
+                            <li><a class="dropdown-item active" href="data.html">Health Data</a></li>
+                            <li><a class="dropdown-item" href="meal.html">Nutrition Planning</a></li>
+                            <li><a class="dropdown-item" href="community.html">Community</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="about.html">Contact Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <span class="text-white me-3" id="userEmail"></span>
+                    <button class="btn btn-outline-light" onclick="logout()">
+                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Health Data Tracking</h1>
+        
+        <!-- Loading Indicator -->
+        <div id="loadingIndicator" class="text-center my-3" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Data Entry Form -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Add New Health Data</h5>
+            </div>
+            <div class="card-body">
+                <form id="trackingForm">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label for="weight" class="form-label">Weight (kg):</label>
+                            <input type="number" step="0.1" class="form-control" id="weight" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="bloodPressure" class="form-label">Blood Pressure:</label>
+                            <input type="text" class="form-control" id="bloodPressure" placeholder="120/80" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="heartRate" class="form-label">Heart Rate (bpm):</label>
+                            <input type="number" class="form-control" id="heartRate" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="sleepPatterns" class="form-label">Sleep (hours):</label>
+                            <input type="text" class="form-control" id="sleepPatterns" placeholder="7-8" required>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="window.trackHealthData()">
+                        <i class="fas fa-save me-2"></i>Save Data
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Dashboard Widgets -->
+        <div class="dashboard-container">
+            <div class="card health-widget">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-weight me-2"></i>Weight</h5>
+                    <p class="card-text">Latest: <span id="weightValue">N/A</span> kg</p>
+                </div>
+            </div>
+            <div class="card health-widget">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-heartbeat me-2"></i>Blood Pressure</h5>
+                    <p class="card-text">Latest: <span id="bloodPressureValue">N/A</span></p>
+                </div>
+            </div>
+            <div class="card health-widget">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-heart me-2"></i>Heart Rate</h5>
+                    <p class="card-text">Latest: <span id="heartRateValue">N/A</span> BPM</p>
+                </div>
+            </div>
+            <div class="card health-widget">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-moon me-2"></i>Sleep</h5>
+                    <p class="card-text">Latest: <span id="sleepPatternsValue">N/A</span> hours</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Table -->
+        <div class="card mt-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-history me-2"></i>Health Data History</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Weight (kg)</th>
+                                <th>Blood Pressure</th>
+                                <th>Heart Rate (BPM)</th>
+                                <th>Sleep (hours)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="healthTableBody">
+                            <tr>
+                                <td colspan="6" class="text-center">No data available</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-heartbeat me-2"></i>MediConnect</h5>
+                    <p>Your trusted partner in health and wellness.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="../main.html" class="text-white-50">Home</a></li>
+                        <li><a href="mentalhealth.html" class="text-white-50">Mental Health</a></li>
+                        <li><a href="symptom.html" class="text-white-50">Symptom Checker</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i> mediconnect@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 MediConnect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../js/data.js"></script>
+    <script>
+        window.logout = function() {
+            localStorage.removeItem('user');
+            window.location.href = '../index.html';
+        };
+    </script>
+</body>
+</html>

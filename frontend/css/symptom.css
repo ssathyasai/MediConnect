@@ -1,0 +1,130 @@
+@import 'style.css';
+
+#symptom-checker {
+    max-width: 800px;
+    width: 90%;
+    background: linear-gradient(135deg, var(--accent-color) 0%, #ffffff 100%);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    margin: 30px auto;
+    animation: fadeIn 0.6s ease;
+}
+
+#symptom-checker h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#symptom-checker p {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#symptom-checker label {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    display: block;
+    font-size: 1.1rem;
+}
+
+#symptoms {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: var(--transition);
+    margin-bottom: 20px;
+}
+
+#symptoms:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(4, 54, 74, 0.1);
+}
+
+#symptom-checker button {
+    background: linear-gradient(135deg, var(--success-color) 0%, #45a049 100%);
+    color: var(--white);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 100%;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#symptom-checker button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+}
+
+#result {
+    margin: 30px 0 20px;
+    padding: 20px;
+    background: var(--white);
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: center;
+    border-left: 5px solid var(--success-color);
+}
+
+#disease-table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+#disease-table th {
+    background-color: #B31312;
+    color: var(--white);
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+#disease-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+#disease-table tbody tr:hover {
+    background-color: rgba(179, 19, 18, 0.05);
+}
+
+#disease-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    #symptom-checker {
+        padding: 25px;
+    }
+    
+    #symptom-checker h1 {
+        font-size: 2rem;
+    }
+    
+    #disease-table th,
+    #disease-table td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}

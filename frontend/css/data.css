@@ -1,0 +1,124 @@
+@import 'style.css';
+
+.dashboard-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.health-widget {
+    width: 18rem;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    background: linear-gradient(135deg, var(--accent-color) 0%, #ffffff 100%);
+    transition: var(--transition);
+    overflow: hidden;
+}
+
+.health-widget:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(4, 54, 74, 0.2);
+}
+
+.health-widget .card-body {
+    padding: 25px;
+}
+
+.health-widget .card-title {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+.health-widget .card-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+.health-widget .card-text span {
+    display: block;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-top: 10px;
+}
+
+#trackingForm {
+    background: linear-gradient(135deg, var(--white) 0%, var(--accent-color) 100%);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+}
+
+#trackingForm .form-label {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+#trackingForm .form-control {
+    border: 2px solid #e0e0e0;
+    transition: var(--transition);
+}
+
+#trackingForm .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: none;
+}
+
+.table-responsive {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    margin-top: 30px;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.table td {
+    vertical-align: middle;
+    font-weight: 500;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(210, 224, 251, 0.3);
+}
+
+.btn-save {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #052c3a 100%);
+    color: var(--white);
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 25px;
+    transition: var(--transition);
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(4, 54, 74, 0.3);
+}
