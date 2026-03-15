@@ -17,18 +17,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
+
 // ============= DATABASE CONNECTION =============
+
 // MongoDB Atlas Connection (Cloud Database)
-const MONGODB_URI = process.env.MONGODB_URI || '"mongodb+srv://sathyasai1357:Sriramula143@cluster0.p6q3neg.mongodb.net/?appName=Cluster0";'
-mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 5000
-}).then(() => {
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+    console.error("❌ MONGODB_URI not found in environment variables");
+    process.exit(1);
+}
+
+mongoose.connect(MONGODB_URI)
+.then(() => {
     console.log('✅ Connected to MongoDB Atlas');
-    console.log('📊 Database: mediconnect');
+    console.log('📊 Database: healthDB');
     console.log('📁 Collections: users, healthdatas, messages');
-}).catch(err => {
+})
+.catch(err => {
     console.error('❌ MongoDB Connection Error:', err.message);
     process.exit(1);
 });
