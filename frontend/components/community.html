@@ -1,158 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MediConnect - Community</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/community.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community - MediConnect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #b6fffa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background-color: #04364a !important;
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+        .btn-login {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        .btn-signup {
+            background: #1a7a76;
+            border: 2px solid #1a7a76;
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+        }
+        .community-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .message {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid #1a7a76;
+        }
+        .message strong {
+            color: #04364a;
+        }
+        .message small {
+            color: #666;
+            display: block;
+            margin-top: 5px;
+        }
+        #message-list {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .chat-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .chat-input button {
+            padding: 12px 30px;
+            background: #1a7a76;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .chat-input button:hover {
+            background: #04364a;
+        }
+        .login-prompt {
+            text-align: center;
+            padding: 50px;
+            background: white;
+            border-radius: 20px;
+            margin: 50px auto;
+            max-width: 500px;
+        }
+    </style>
 </head>
-
 <body>
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="../main.html">
-        <i class="fas fa-heartbeat me-2"></i>MediConnect
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="../main.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About Us</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-              Services
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="mentalhealth.html">Mental Health</a></li>
-              <li><a class="dropdown-item" href="symptom.html">Symptom Checker</a></li>
-              <li><a class="dropdown-item" href="data.html">Health Data</a></li>
-              <li><a class="dropdown-item" href="meal.html">Nutrition Planning</a></li>
-              <li><a class="dropdown-item active" href="community.html">Community</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="about.html">Contact Us</a></li>
-            </ul>
-          </li>
-        </ul>
-        <div class="d-flex" id="authButtons">
-          <a href="login.html"><button class="btn btn-outline-light me-2">Login</button></a>
-          <a href="signup.html"><button class="btn btn-primary">SignUp</button></a>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../main.html"><i class="fas fa-heartbeat"></i> MediConnect</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../main.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Services</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="mentalhealth.html">Mental Health</a></li>
+                            <li><a class="dropdown-item" href="symptom.html">Symptom Checker</a></li>
+                            <li><a class="dropdown-item" href="data.html">Health Data</a></li>
+                            <li><a class="dropdown-item" href="meal.html">Nutrition Planning</a></li>
+                            <li><a class="dropdown-item" href="community.html">Community</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="ms-3">
+                    <a href="login.html" class="btn-login">Login</a>
+                    <a href="signup.html" class="btn-signup">Sign Up</a>
+                </div>
+            </div>
         </div>
-        <div class="d-flex" id="userMenu" style="display: none;">
-          <span class="text-white me-3" id="userWelcome"></span>
-          <button class="btn btn-outline-light" onclick="logout()">Logout</button>
-        </div>
-      </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Community Header -->
-  <header class="community-header">
-    <div class="container text-center">
-      <h1><i class="fas fa-users me-3"></i>Community Chat</h1>
-      <p>Connect with others, share experiences, and find support</p>
-    </div>
-  </header>
+    <div id="content"></div>
 
-  <!-- Chat Container -->
-  <div class="chat-container">
-    <div class="chat-box">
-      <!-- Name Input -->
-      <div class="name-section">
-        <div class="input-group">
-          <span class="input-group-text"><i class="fas fa-user"></i></span>
-          <input type="text" id="username" class="form-control" placeholder="Enter your name to start chatting">
-          <button class="btn btn-primary" id="setNameBtn">Join Chat</button>
-        </div>
-      </div>
+    <script>
+        // Check login status
+        const userName = localStorage.getItem('userName');
+        const userId = localStorage.getItem('userId');
 
-      <!-- Messages Area -->
-      <div class="messages-area" id="messagesArea">
-        <div class="welcome-message text-center text-muted py-5">
-          <i class="fas fa-comments fa-3x mb-3"></i>
-          <h4>Welcome to Community Chat!</h4>
-          <p>Enter your name above to start chatting with the community.</p>
-        </div>
-        <ul class="message-list" id="messageList"></ul>
-      </div>
+        if (!userId) {
+            document.getElementById('content').innerHTML = `
+                <div class="login-prompt">
+                    <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                    <h3>Join Our Community</h3>
+                    <p>Please login to participate in community discussions.</p>
+                    <a href="login.html" class="btn btn-primary">Login Now</a>
+                </div>
+            `;
+        } else {
+            document.getElementById('content').innerHTML = `
+                <div class="community-container">
+                    <h2 class="text-center mb-4"><i class="fas fa-users text-primary"></i> Community Chat</h2>
+                    <p class="text-center">Welcome, ${userName}! Share your thoughts with the community.</p>
+                    
+                    <div id="message-list"></div>
+                    
+                    <div class="chat-input">
+                        <input type="text" id="messageInput" placeholder="Type your message...">
+                        <button onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+            `;
+            
+            // Load messages
+            loadMessages();
+        }
 
-      <!-- Message Input -->
-      <div class="message-input-section">
-        <form id="messageForm" class="input-group">
-          <input type="text" id="messageInput" class="form-control" placeholder="Type your message..." disabled>
-          <button class="btn btn-primary" type="submit" disabled>
-            <i class="fas fa-paper-plane me-2"></i>Send
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
+        // Load messages from localStorage (since no backend for chat)
+        function loadMessages() {
+            const messages = JSON.parse(localStorage.getItem('communityMessages') || '[]');
+            const messageList = document.getElementById('message-list');
+            
+            if (messages.length === 0) {
+                messageList.innerHTML = '<p class="text-center text-muted">No messages yet. Be the first to say something!</p>';
+                return;
+            }
+            
+            messageList.innerHTML = messages.reverse().map(msg => `
+                <div class="message">
+                    <strong>${msg.userName}</strong>
+                    <p>${msg.text}</p>
+                    <small>${new Date(msg.timestamp).toLocaleString()}</small>
+                </div>
+            `).join('');
+        }
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white py-4 mt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h5><i class="fas fa-heartbeat me-2"></i>MediConnect</h5>
-          <p>Your trusted partner in health and wellness.</p>
-        </div>
-        <div class="col-md-4">
-          <h5>Quick Links</h5>
-          <ul class="list-unstyled">
-            <li><a href="../main.html" class="text-white-50">Home</a></li>
-            <li><a href="mentalhealth.html" class="text-white-50">Mental Health</a></li>
-            <li><a href="symptom.html" class="text-white-50">Symptom Checker</a></li>
-            <li><a href="meal.html" class="text-white-50">Nutrition Planning</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <h5>Contact</h5>
-          <ul class="list-unstyled">
-            <li><i class="fas fa-envelope me-2"></i> mediconnect@gmail.com</li>
-            <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
-          </ul>
-        </div>
-      </div>
-      <hr class="bg-light">
-      <div class="text-center">
-        <p class="mb-0">&copy; 2024 MediConnect. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+        // Send message
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const text = input.value.trim();
+            
+            if (!text) return;
+            
+            const messages = JSON.parse(localStorage.getItem('communityMessages') || '[]');
+            
+            messages.push({
+                userName: localStorage.getItem('userName'),
+                userId: localStorage.getItem('userId'),
+                text: text,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Keep only last 50 messages
+            if (messages.length > 50) messages.shift();
+            
+            localStorage.setItem('communityMessages', JSON.stringify(messages));
+            
+            input.value = '';
+            loadMessages();
+        }
+    </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module">
-    import { getCurrentUser, logout as authLogout } from '../js/auth.js';
-    import { initChat } from '../js/community.js';
-
-    // Check authentication
-    const user = getCurrentUser();
-    if (user) {
-      document.getElementById('authButtons').style.display = 'none';
-      document.getElementById('userMenu').style.display = 'flex';
-      document.getElementById('userWelcome').innerHTML = `<i class="fas fa-user-circle me-1"></i>${user.firstName || user.email}`;
-      
-      // Auto-fill username if logged in
-      const usernameInput = document.getElementById('username');
-      if (usernameInput && user.firstName) {
-        usernameInput.value = user.firstName;
-      }
-    }
-
-    // Initialize chat
-    initChat();
-
-    window.logout = authLogout;
-  </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

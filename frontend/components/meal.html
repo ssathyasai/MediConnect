@@ -1,135 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MediConnect - Nutrition Planning</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/meal.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Planning - MediConnect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #b6fffa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background-color: #04364a !important;
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+        .btn-login {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        .btn-signup {
+            background: #1a7a76;
+            border: 2px solid #1a7a76;
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+        }
+        .meal-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .bmi-calculator {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        .bmi-result {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1a7a76;
+            margin-top: 15px;
+        }
+        .meal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .meal-table th {
+            background: #04364a;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+        .meal-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        .meal-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .normal-bmi { background-color: #d4edda; }
+        .overweight-bmi { background-color: #fff3cd; }
+        .underweight-bmi { background-color: #cce5ff; }
+        .obese-bmi { background-color: #f8d7da; }
+        .login-prompt {
+            text-align: center;
+            padding: 50px;
+            background: white;
+            border-radius: 20px;
+            margin: 50px auto;
+            max-width: 500px;
+        }
+    </style>
 </head>
-
 <body>
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="../main.html">
-        <i class="fas fa-heartbeat me-2"></i>MediConnect
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="../main.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About Us</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
-              Services
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="mentalhealth.html">Mental Health</a></li>
-              <li><a class="dropdown-item" href="symptom.html">Symptom Checker</a></li>
-              <li><a class="dropdown-item" href="data.html">Health Data</a></li>
-              <li><a class="dropdown-item active" href="meal.html">Nutrition Planning</a></li>
-              <li><a class="dropdown-item" href="community.html">Community</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="about.html">Contact Us</a></li>
-            </ul>
-          </li>
-        </ul>
-        <div class="d-flex" id="authButtons">
-          <a href="login.html"><button class="btn btn-outline-light me-2">Login</button></a>
-          <a href="signup.html"><button class="btn btn-primary">SignUp</button></a>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../main.html"><i class="fas fa-heartbeat"></i> MediConnect</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../main.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Services</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="mentalhealth.html">Mental Health</a></li>
+                            <li><a class="dropdown-item" href="symptom.html">Symptom Checker</a></li>
+                            <li><a class="dropdown-item" href="data.html">Health Data</a></li>
+                            <li><a class="dropdown-item" href="meal.html">Nutrition Planning</a></li>
+                            <li><a class="dropdown-item" href="community.html">Community</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="ms-3">
+                    <a href="login.html" class="btn-login">Login</a>
+                    <a href="signup.html" class="btn-signup">Sign Up</a>
+                </div>
+            </div>
         </div>
-        <div class="d-flex" id="userMenu" style="display: none;">
-          <span class="text-white me-3" id="userWelcome"></span>
-          <button class="btn btn-outline-light" onclick="logout()">Logout</button>
-        </div>
-      </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Header -->
-  <header class="text-center my-4">
-    <h1><i class="fas fa-utensils me-3"></i>Nutritional Meal Planning</h1>
-    <p class="lead">Get personalized meal plans based on your BMI</p>
-  </header>
+    <div id="content"></div>
 
-  <!-- BMI Calculator -->
-  <div id="meal-container">
-    <form id="bmi-form">
-      <div class="mb-3">
-        <label for="weight">Weight (kg):</label>
-        <input type="number" id="weight" class="form-control" placeholder="Enter your weight" required>
-      </div>
+    <script>
+        const mealData = {
+            normal: {
+                Monday: ['Oatmeal with Fruits', 'Grilled Chicken Salad', 'Brown Rice with Vegetables'],
+                Tuesday: ['Greek Yogurt with Berries', 'Quinoa Bowl', 'Baked Fish with Steamed Veg'],
+                Wednesday: ['Whole Grain Toast with Avocado', 'Lentil Soup', 'Turkey Wrap'],
+                Thursday: ['Smoothie Bowl', 'Chickpea Salad', 'Grilled Salmon with Quinoa'],
+                Friday: ['Egg White Omelette', 'Tuna Sandwich', 'Vegetable Stir-fry'],
+                Saturday: ['Pancakes with Berries', 'Vegetable Soup', 'Chicken Breast with Sweet Potato'],
+                Sunday: ['French Toast', 'Roasted Vegetables', 'Lean Steak with Salad']
+            },
+            overweight: {
+                Monday: ['Green Smoothie', 'Grilled Fish with Salad', 'Vegetable Soup'],
+                Tuesday: ['Fruit Salad', 'Chicken Breast with Veggies', 'Quinoa with Vegetables'],
+                Wednesday: ['Oatmeal', 'Lentil Soup', 'Grilled Tofu with Salad'],
+                Thursday: ['Boiled Eggs', 'Vegetable Wrap', 'Fish with Steamed Veg'],
+                Friday: ['Protein Shake', 'Chickpea Salad', 'Grilled Chicken with Veg'],
+                Saturday: ['Fresh Fruits', 'Vegetable Stir-fry', 'Baked Fish'],
+                Sunday: ['Smoothie', 'Grilled Vegetables', 'Lean Protein with Salad']
+            },
+            underweight: {
+                Monday: ['Peanut Butter Toast', 'Chicken Rice Bowl', 'Pasta with Meat Sauce'],
+                Tuesday: ['Banana Shake', 'Fish and Chips', 'Rice with Dal'],
+                Wednesday: ['Omelette with Cheese', 'Chicken Curry', 'Potato Mash'],
+                Thursday: ['Full Breakfast', 'Meat with Rice', 'Baked Potato'],
+                Friday: ['Milkshake', 'Pizza', 'Burger with Fries'],
+                Saturday: ['Pancakes', 'Fried Rice', 'Chicken Wings'],
+                Sunday: ['Brunch', 'Roast Dinner', 'Ice Cream']
+            },
+            obese: {
+                Monday: ['Detox Water', 'Steamed Fish', 'Green Salad'],
+                Tuesday: ['Green Tea', 'Vegetable Soup', 'Grilled Chicken'],
+                Wednesday: ['Fruit Juice', 'Quinoa Salad', 'Steamed Veggies'],
+                Thursday: ['Herbal Tea', 'Lentil Soup', 'Grilled Fish'],
+                Friday: ['Cucumber Water', 'Vegetable Stir-fry', 'Chicken Salad'],
+                Saturday: ['Lemon Water', 'Clear Soup', 'Steamed Vegetables'],
+                Sunday: ['Detox Smoothie', 'Grilled Vegetables', 'Light Salad']
+            }
+        };
 
-      <div class="mb-3">
-        <label for="height">Height (cm):</label>
-        <input type="number" id="height" class="form-control" placeholder="Enter your height" required>
-      </div>
+        // Check login status
+        const userName = localStorage.getItem('userName');
+        const userId = localStorage.getItem('userId');
 
-      <button type="button" class="btn btn-primary w-100" onclick="calculateBMI()">
-        <i class="fas fa-calculator me-2"></i>Calculate BMI
-      </button>
-    </form>
+        if (!userId) {
+            document.getElementById('content').innerHTML = `
+                <div class="login-prompt">
+                    <i class="fas fa-utensils fa-3x text-primary mb-3"></i>
+                    <h3>Personalized Meal Plans</h3>
+                    <p>Please login to get BMI-based nutrition planning.</p>
+                    <a href="login.html" class="btn btn-primary">Login Now</a>
+                </div>
+            `;
+        } else {
+            document.getElementById('content').innerHTML = `
+                <div class="meal-container">
+                    <h2 class="text-center mb-4"><i class="fas fa-utensils text-primary"></i> Nutrition Meal Planning</h2>
+                    <p class="text-center">Welcome, ${userName}! Calculate your BMI to get personalized meal plans.</p>
+                    
+                    <div class="bmi-calculator">
+                        <h4>Calculate Your BMI</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Weight (kg)</label>
+                                <input type="number" id="weight" class="form-control" placeholder="Enter weight">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Height (cm)</label>
+                                <input type="number" id="height" class="form-control" placeholder="Enter height">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary mt-3" onclick="calculateBMI()">Calculate BMI</button>
+                        <div id="bmiResult" class="bmi-result"></div>
+                    </div>
 
-    <div id="result" class="alert alert-info mt-3" style="display: none;"></div>
-  </div>
+                    <div id="mealPlan"></div>
+                </div>
+            `;
+        }
 
-  <!-- Meal Plan Container -->
-  <div id="meal-plan-container" class="container"></div>
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white py-4 mt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h5><i class="fas fa-heartbeat me-2"></i>MediConnect</h5>
-          <p>Your trusted partner in health and wellness.</p>
-        </div>
-        <div class="col-md-4">
-          <h5>Quick Links</h5>
-          <ul class="list-unstyled">
-            <li><a href="../main.html" class="text-white-50">Home</a></li>
-            <li><a href="mentalhealth.html" class="text-white-50">Mental Health</a></li>
-            <li><a href="symptom.html" class="text-white-50">Symptom Checker</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <h5>Contact</h5>
-          <ul class="list-unstyled">
-            <li><i class="fas fa-envelope me-2"></i> mediconnect@gmail.com</li>
-            <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
-          </ul>
-        </div>
-      </div>
-      <hr class="bg-light">
-      <div class="text-center">
-        <p class="mb-0">&copy; 2024 MediConnect. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+            if (!weight || !height) {
+                alert('Please enter both weight and height');
+                return;
+            }
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module">
-    import { getCurrentUser, logout as authLogout } from '../js/auth.js';
+            const bmi = weight / ((height/100) * (height/100));
+            let category = '';
+            let bmiClass = '';
 
-    const user = getCurrentUser();
-    if (user) {
-      document.getElementById('authButtons').style.display = 'none';
-      document.getElementById('userMenu').style.display = 'flex';
-      document.getElementById('userWelcome').innerHTML = `<i class="fas fa-user-circle me-1"></i>${user.firstName || user.email}`;
-    }
+            if (bmi < 18.5) {
+                category = 'underweight';
+                bmiClass = 'Underweight';
+            } else if (bmi < 25) {
+                category = 'normal';
+                bmiClass = 'Normal Weight';
+            } else if (bmi < 30) {
+                category = 'overweight';
+                bmiClass = 'Overweight';
+            } else {
+                category = 'obese';
+                bmiClass = 'Obese';
+            }
 
-    window.logout = authLogout;
-  </script>
-  <script src="../js/meal.js"></script>
+            document.getElementById('bmiResult').innerHTML = `Your BMI: ${bmi.toFixed(1)} - ${bmiClass}`;
+            displayMealPlan(category);
+        }
+
+        function displayMealPlan(category) {
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            
+            let html = `
+                <h4 class="mt-4">Your Personalized Meal Plan</h4>
+                <table class="meal-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Breakfast</th>
+                            <th>Lunch</th>
+                            <th>Dinner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            days.forEach(day => {
+                html += `
+                    <tr class="${category}-bmi">
+                        <td><strong>${day}</strong></td>
+                        <td>${mealData[category][day][0]}</td>
+                        <td>${mealData[category][day][1]}</td>
+                        <td>${mealData[category][day][2]}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                    </tbody>
+                </table>
+                <p class="text-muted mt-3"><small>* This is a general guideline. Consult a nutritionist for personalized advice.</small></p>
+            `;
+
+            document.getElementById('mealPlan').innerHTML = html;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

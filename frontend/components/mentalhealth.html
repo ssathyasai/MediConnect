@@ -1,181 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MediConnect - Mental Health</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/mentalhealth.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health - MediConnect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #b6fffa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background-color: #04364a !important;
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+        .btn-login {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        .btn-signup {
+            background: #1a7a76;
+            border: 2px solid #1a7a76;
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+        }
+        .mental-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .quiz-question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1a7a76;
+        }
+        .quiz-options {
+            margin-left: 20px;
+        }
+        .quiz-options label {
+            display: block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .quiz-options input {
+            margin-right: 10px;
+        }
+        .story-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #04364a;
+        }
+        .story-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .login-prompt {
+            text-align: center;
+            padding: 50px;
+            background: white;
+            border-radius: 20px;
+            margin: 50px auto;
+            max-width: 500px;
+        }
+    </style>
 </head>
-
 <body>
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="../main.html">
-        <i class="fas fa-heartbeat me-2"></i>MediConnect
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="../main.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About Us</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
-              Services
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item active" href="mentalhealth.html">Mental Health</a></li>
-              <li><a class="dropdown-item" href="symptom.html">Symptom Checker</a></li>
-              <li><a class="dropdown-item" href="data.html">Health Data</a></li>
-              <li><a class="dropdown-item" href="meal.html">Nutrition Planning</a></li>
-              <li><a class="dropdown-item" href="community.html">Community</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="about.html">Contact Us</a></li>
-            </ul>
-          </li>
-        </ul>
-        <div class="d-flex" id="authButtons">
-          <a href="login.html"><button class="btn btn-outline-light me-2">Login</button></a>
-          <a href="signup.html"><button class="btn btn-primary">SignUp</button></a>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../main.html"><i class="fas fa-heartbeat"></i> MediConnect</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../main.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Services</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="mentalhealth.html">Mental Health</a></li>
+                            <li><a class="dropdown-item" href="symptom.html">Symptom Checker</a></li>
+                            <li><a class="dropdown-item" href="data.html">Health Data</a></li>
+                            <li><a class="dropdown-item" href="meal.html">Nutrition Planning</a></li>
+                            <li><a class="dropdown-item" href="community.html">Community</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="ms-3">
+                    <a href="login.html" class="btn-login">Login</a>
+                    <a href="signup.html" class="btn-signup">Sign Up</a>
+                </div>
+            </div>
         </div>
-        <div class="d-flex" id="userMenu" style="display: none;">
-          <span class="text-white me-3" id="userWelcome"></span>
-          <button class="btn btn-outline-light" onclick="logout()">Logout</button>
-        </div>
-      </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Welcome Section -->
-  <section id="home" class="container my-4">
-    <h2 class="text-center mb-4"><i class="fas fa-brain me-3"></i>Welcome to Your Mental Health Hub</h2>
-    <p class="lead">Your source for information, support, and wellness. Your Mental Health Hub is a compassionate and informative space dedicated to supporting your well-being. We understand that mental health is an integral part of overall health, and our goal is to provide resources and assistance to help you navigate your journey towards mental well-being.</p>
-  </section>
+    <div id="content"></div>
 
-  <!-- Quiz Section -->
-  <section class="container my-5">
-    <h2 class="text-center mb-4" style="color: #d81b60;">Take the Mental Health Quiz</h2>
-    <p class="text-center mb-4">This quiz is designed to help you assess your mental health. Answer the following questions honestly to help us understand where you are in your mental health journey.</p>
+    <script>
+        const questions = [
+            "How often do you feel overwhelmed by daily tasks?",
+            "How would you rate your quality of sleep?",
+            "Do you often feel fatigued or lacking in energy?",
+            "How often do you experience feelings of sadness?",
+            "Do you find pleasure in activities you used to enjoy?",
+            "How would you rate your overall mood?",
+            "Do you have difficulty concentrating?",
+            "How often do you feel anxious?",
+            "Do you have a good support system?",
+            "How would you rate your work-life balance?"
+        ];
 
-    <!-- Quiz Container -->
-    <div id="quiz-container" class="mb-4"></div>
+        // Check login status
+        const userName = localStorage.getItem('userName');
+        const userId = localStorage.getItem('userId');
 
-    <!-- Result Container -->
-    <div id="result-container" style="display: none;" class="mb-4">
-      <h2 class="text-center mb-4">Your Mental Health Assessment</h2>
-      <p id="result-message" class="lead text-center"></p>
-      <p id="resources-message" class="text-center"></p>
-      <button id="retake-quiz" class="btn btn-primary mx-auto d-block">
-        <i class="fas fa-redo me-2"></i>Retake Quiz
-      </button>
-    </div>
+        if (!userId) {
+            document.getElementById('content').innerHTML = `
+                <div class="login-prompt">
+                    <i class="fas fa-brain fa-3x text-primary mb-3"></i>
+                    <h3>Mental Health Assessment</h3>
+                    <p>Please login to take the mental health quiz and read personal stories.</p>
+                    <a href="login.html" class="btn btn-primary">Login Now</a>
+                </div>
+            `;
+        } else {
+            document.getElementById('content').innerHTML = `
+                <div class="mental-container">
+                    <h2 class="text-center mb-4"><i class="fas fa-brain text-primary"></i> Mental Health Hub</h2>
+                    <p class="text-center">Welcome, ${userName}! Take care of your mental wellbeing.</p>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> This quiz is for self-assessment only. For professional help, please consult a mental health expert.
+                    </div>
 
-    <!-- Start Quiz Button -->
-    <button id="start-quiz" class="btn btn-primary mx-auto d-block">
-      <i class="fas fa-play me-2"></i>Start Quiz
-    </button>
-  </section>
+                    <h4 class="mt-4">Mental Health Quiz</h4>
+                    <div id="quizArea">
+                        <button class="btn btn-primary mb-4" onclick="startQuiz()">Start Quiz</button>
+                    </div>
 
-  <!-- Personal Stories -->
-  <section id="personal-stories" class="py-5 bg-light">
-    <div class="container">
-      <h2 class="text-center mb-5">Personal Stories and Testimonials</h2>
-      <p class="text-center mb-5">Discover the inspiring journeys of individuals who have faced mental health challenges and emerged stronger.</p>
+                    <h4 class="mt-5">Personal Stories</h4>
+                    
+                    <div class="story-card">
+                        <div class="d-flex align-items-center">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100" alt="Sarah">
+                            <div class="ms-3">
+                                <h5>Sarah's Journey</h5>
+                                <p>"Therapy helped me understand myself better. It's okay to ask for help."</p>
+                            </div>
+                        </div>
+                    </div>
 
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <div class="personal-story">
-            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop" alt="Sarah's Photo">
-            <h4>Sarah Johnson</h4>
-            <p class="text-muted mb-3">"From Darkness to Light"</p>
-            <p>Meet Sarah, a courageous individual who battled depression and anxiety for years. In her heartfelt narrative, she shares the ups and downs of her mental health journey and the strategies that ultimately led her to a place of healing.</p>
-            <blockquote class="blockquote">
-              <p class="mb-0"><em>"Reaching out for help was the hardest, but most rewarding, decision I ever made."</em></p>
-            </blockquote>
-          </div>
-        </div>
+                    <div class="story-card">
+                        <div class="d-flex align-items-center">
+                            <img src="https://images.unsplash.com/photo-1500048993953-d23a436266cf?w=100" alt="John">
+                            <div class="ms-3">
+                                <h5>John's Story</h5>
+                                <p>"Meditation and exercise changed my life. Small steps lead to big changes."</p>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="col-md-4 mb-4">
-          <div class="personal-story">
-            <img src="https://images.unsplash.com/photo-1500048993953-d23a436266cf?w=400&h=400&fit=crop" alt="John's Photo">
-            <h4>John Smith</h4>
-            <p class="text-muted mb-3">"Breaking the Silence"</p>
-            <p>John's story is one of resilience and strength. Having faced the challenges of bipolar disorder, he opens up about the importance of seeking professional help, building a support system, and embracing self-care practices.</p>
-            <blockquote class="blockquote">
-              <p class="mb-0"><em>"Sharing my story is my way of letting others know that they are not alone."</em></p>
-            </blockquote>
-          </div>
-        </div>
+                    <div class="story-card">
+                        <div class="d-flex align-items-center">
+                            <img src="https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?w=100" alt="Emily">
+                            <div class="ms-3">
+                                <h5>Emily's Experience</h5>
+                                <p>"Support groups made me realize I'm not alone. We heal together."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
 
-        <div class="col-md-4 mb-4">
-          <div class="personal-story">
-            <img src="https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?w=400&h=400&fit=crop" alt="Emily's Photo">
-            <h4>Emily Rodriguez</h4>
-            <p class="text-muted mb-3">"Finding Strength in Vulnerability"</p>
-            <p>Emily shares her journey of overcoming anxiety and panic attacks. Through therapy and self-discovery, she found strength in vulnerability and learned to embrace her true self.</p>
-            <blockquote class="blockquote">
-              <p class="mb-0"><em>"Accepting my vulnerabilities was the turning point in my journey."</em></p>
-            </blockquote>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        let currentQuestion = 0;
+        let answers = [];
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white py-4">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h5><i class="fas fa-heartbeat me-2"></i>MediConnect</h5>
-          <p>Your trusted partner in health and wellness.</p>
-        </div>
-        <div class="col-md-4">
-          <h5>Quick Links</h5>
-          <ul class="list-unstyled">
-            <li><a href="../main.html" class="text-white-50">Home</a></li>
-            <li><a href="about.html" class="text-white-50">About Us</a></li>
-            <li><a href="symptom.html" class="text-white-50">Symptom Checker</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <h5>Contact</h5>
-          <ul class="list-unstyled">
-            <li><i class="fas fa-envelope me-2"></i> mediconnect@gmail.com</li>
-            <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
-          </ul>
-        </div>
-      </div>
-      <hr class="bg-light">
-      <div class="text-center">
-        <p class="mb-0">&copy; 2024 MediConnect. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+        function startQuiz() {
+            currentQuestion = 0;
+            answers = [];
+            showQuestion();
+        }
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module">
-    import { getCurrentUser, logout as authLogout } from '../js/auth.js';
+        function showQuestion() {
+            if (currentQuestion >= questions.length) {
+                showResults();
+                return;
+            }
 
-    const user = getCurrentUser();
-    if (user) {
-      document.getElementById('authButtons').style.display = 'none';
-      document.getElementById('userMenu').style.display = 'flex';
-      document.getElementById('userWelcome').innerHTML = `<i class="fas fa-user-circle me-1"></i>${user.firstName || user.email}`;
-    }
+            let html = `
+                <div class="quiz-question">
+                    <h5>Question ${currentQuestion + 1} of ${questions.length}</h5>
+                    <p><strong>${questions[currentQuestion]}</strong></p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="answer" value="0"> Not at all</label>
+                        <label><input type="radio" name="answer" value="1"> Sometimes</label>
+                        <label><input type="radio" name="answer" value="2"> Often</label>
+                        <label><input type="radio" name="answer" value="3"> Always</label>
+                    </div>
+                    <button class="btn btn-primary mt-3" onclick="nextQuestion()">Next</button>
+                </div>
+            `;
 
-    window.logout = authLogout;
-  </script>
-  <script src="../js/mentalhealth.js"></script>
+            document.getElementById('quizArea').innerHTML = html;
+        }
+
+        function nextQuestion() {
+            const selected = document.querySelector('input[name="answer"]:checked');
+            if (!selected) {
+                alert('Please select an answer');
+                return;
+            }
+
+            answers.push(parseInt(selected.value));
+            currentQuestion++;
+            
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            const total = answers.reduce((a, b) => a + b, 0);
+            const maxScore = questions.length * 3;
+            const percentage = (total / maxScore) * 100;
+
+            let result = '';
+            let resources = '';
+
+            if (percentage <= 25) {
+                result = 'Your mental health appears to be in a good state.';
+                resources = 'Continue practicing self-care and mindfulness. Stay connected with loved ones.';
+            } else if (percentage <= 50) {
+                result = 'You may be experiencing some mild stress.';
+                resources = 'Consider relaxation techniques, exercise, and talking to friends/family.';
+            } else if (percentage <= 75) {
+                result = 'You might be facing moderate challenges.';
+                resources = 'Consider speaking with a mental health professional. You deserve support.';
+            } else {
+                result = 'Your responses indicate significant challenges.';
+                resources = 'We strongly recommend consulting a mental health professional. Help is available.';
+            }
+
+            document.getElementById('quizArea').innerHTML = `
+                <div class="alert alert-info">
+                    <h5>Your Results</h5>
+                    <p>${result}</p>
+                    <p><strong>Recommendation:</strong> ${resources}</p>
+                    <button class="btn btn-primary mt-3" onclick="startQuiz()">Retake Quiz</button>
+                </div>
+            `;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

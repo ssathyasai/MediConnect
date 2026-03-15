@@ -1,365 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MediConnect - Home</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    .hero-section {
-      background: linear-gradient(135deg, var(--primary-color) 0%, #0a4d68 100%);
-      color: white;
-      padding: 100px 0;
-      margin-bottom: 50px;
-    }
-    
-    .service-card {
-      background: white;
-      border-radius: 15px;
-      padding: 30px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      height: 100%;
-      cursor: pointer;
-    }
-    
-    .service-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(4, 54, 74, 0.2);
-    }
-    
-    .service-icon {
-      width: 80px;
-      height: 80px;
-      background: var(--accent-color);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 2rem;
-      color: var(--primary-color);
-    }
-    
-    .welcome-section {
-      background: var(--white);
-      padding: 60px 0;
-      margin-bottom: 50px;
-    }
-    
-    .stat-card {
-      text-align: center;
-      padding: 20px;
-      background: var(--white);
-      border-radius: 10px;
-      box-shadow: var(--shadow);
-    }
-    
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--primary-color);
-    }
-    
-    .stat-label {
-      color: var(--text-dark);
-      font-size: 1rem;
-    }
-    
-    #userWelcome {
-      color: var(--secondary-color);
-      font-weight: 600;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediConnect - Your Health Companion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a7a76;
+            --secondary: #04364a;
+            --accent: #8DDFCB;
+            --light: #b6fffa;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, var(--light) 0%, #e3f6f5 100%);
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary) !important;
+        }
+
+        .navbar-brand i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+
+        .nav-link {
+            color: var(--secondary) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary) !important;
+            transform: translateY(-2px);
+        }
+
+        .btn-login {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-right: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-login:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26,122,118,0.3);
+        }
+
+        .btn-signup {
+            background: var(--primary);
+            border: 2px solid var(--primary);
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-signup:hover {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(4,54,74,0.3);
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: var(--accent);
+            z-index: -1;
+            border-radius: 10px;
+        }
+
+        .hero-quote {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            padding: 30px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--primary);
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-quote i {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+
+        .hero-quote .author {
+            display: block;
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .btn-get-started {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            border: none;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease 0.4s both;
+            box-shadow: 0 10px 20px rgba(26,122,118,0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-get-started:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(26,122,118,0.4);
+            color: white;
+        }
+
+        .hero-image {
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        .features-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--secondary);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid rgba(26,122,118,0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(26,122,118,0.2);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--accent), var(--light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .feature-icon i {
+            font-size: 35px;
+            color: var(--primary);
+        }
+
+        .feature-card h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .floating-shape {
+            position: absolute;
+            background: linear-gradient(45deg, var(--accent), transparent);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 1;
+        }
+
+        .shape1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            right: -100px;
+        }
+
+        .shape2 {
+            width: 400px;
+            height: 400px;
+            bottom: -100px;
+            left: -100px;
+            background: linear-gradient(45deg, var(--light), transparent);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-quote {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="main.html">
-        <i class="fas fa-heartbeat me-2"></i>MediConnect
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="main.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="components/about.html">About Us</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-              Services
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-heartbeat"></i>
+                MediConnect
             </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="components/mentalhealth.html"><i class="fas fa-brain me-2"></i>Mental Health</a></li>
-              <li><a class="dropdown-item" href="components/symptom.html"><i class="fas fa-stethoscope me-2"></i>Symptom Checker</a></li>
-              <li><a class="dropdown-item" href="components/data.html"><i class="fas fa-chart-line me-2"></i>Health Data</a></li>
-              <li><a class="dropdown-item" href="components/meal.html"><i class="fas fa-utensils me-2"></i>Nutrition Planning</a></li>
-              <li><a class="dropdown-item" href="components/community.html"><i class="fas fa-users me-2"></i>Community</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="components/about.html"><i class="fas fa-envelope me-2"></i>Contact Us</a></li>
-            </ul>
-          </li>
-        </ul>
-        <div class="d-flex align-items-center">
-          <span class="text-white me-3" id="userWelcome"></span>
-          <button class="btn btn-outline-light me-2" onclick="window.location.href='components/login.html'">
-            <i class="fas fa-sign-in-alt me-2"></i>Login
-          </button>
-          <button class="btn btn-primary" onclick="window.location.href='components/signup.html'">
-            <i class="fas fa-user-plus me-2"></i>Sign Up
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="container text-center">
-      <h1 class="display-3 mb-4">Welcome to MediConnect</h1>
-      <p class="lead mb-5">Your comprehensive health monitoring platform for a better tomorrow</p>
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <div class="input-group">
-            <input type="text" class="form-control form-control-lg" placeholder="Search health services...">
-            <button class="btn btn-primary btn-lg" type="button">
-              <i class="fas fa-search me-2"></i>Search
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
             </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Welcome Section (shown when logged in) -->
-  <section class="welcome-section" id="welcomeSection" style="display: none;">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-8">
-          <h2>Welcome back, <span id="userNameDisplay"></span>! 👋</h2>
-          <p class="lead">Continue your health journey with us. Here's your health summary:</p>
-        </div>
-        <div class="col-md-4 text-end">
-          <button class="btn btn-danger" onclick="logout()">
-            <i class="fas fa-sign-out-alt me-2"></i>Logout
-          </button>
-        </div>
-      </div>
-      
-      <!-- Quick Stats -->
-      <div class="row mt-4">
-        <div class="col-md-3">
-          <div class="stat-card">
-            <div class="stat-number" id="lastWeight">-</div>
-            <div class="stat-label">Last Weight (kg)</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="stat-card">
-            <div class="stat-number" id="lastBP">-</div>
-            <div class="stat-label">Last BP</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="stat-card">
-            <div class="stat-number" id="lastHR">-</div>
-            <div class="stat-label">Last Heart Rate</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="stat-card">
-            <div class="stat-number" id="lastSleep">-</div>
-            <div class="stat-label">Last Sleep (hrs)</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section class="container my-5">
-    <h2 class="text-center mb-5">Our Services</h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="service-card" onclick="window.location.href='components/mentalhealth.html'">
-          <div class="service-icon">
-            <i class="fas fa-brain"></i>
-          </div>
-          <h3>Mental Health</h3>
-          <p>Assess your mental wellbeing with our interactive quiz and find resources for support.</p>
-          <span class="btn btn-link">Learn More →</span>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="service-card" onclick="window.location.href='components/symptom.html'">
-          <div class="service-icon">
-            <i class="fas fa-stethoscope"></i>
-          </div>
-          <h3>Symptom Checker</h3>
-          <p>Check your symptoms and get insights about possible conditions.</p>
-          <span class="btn btn-link">Learn More →</span>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="service-card" onclick="window.location.href='components/data.html'">
-          <div class="service-icon">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <h3>Health Data</h3>
-          <p>Track your vital signs and monitor your health progress over time.</p>
-          <span class="btn btn-link">Learn More →</span>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="service-card" onclick="window.location.href='components/meal.html'">
-          <div class="service-icon">
-            <i class="fas fa-utensils"></i>
-          </div>
-          <h3>Nutrition Planning</h3>
-          <p>Get personalized meal plans based on your BMI and dietary needs.</p>
-          <span class="btn btn-link">Learn More →</span>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="service-card" onclick="window.location.href='components/community.html'">
-          <div class="service-icon">
-            <i class="fas fa-users"></i>
-          </div>
-          <h3>Community</h3>
-          <p>Connect with others, share experiences, and find support.</p>
-          <span class="btn btn-link">Learn More →</span>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="service-card" onclick="window.location.href='components/about.html'">
-          <div class="service-icon">
-            <i class="fas fa-info-circle"></i>
-          </div>
-          <h3>About Us</h3>
-          <p>Learn about our mission, vision, and how we're transforming healthcare.</p>
-          <span class="btn btn-link">Learn More →</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="bg-light py-5">
-    <div class="container">
-      <h2 class="text-center mb-5">Why Choose MediConnect?</h2>
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <div class="d-flex">
-            <div class="me-3">
-              <i class="fas fa-shield-alt fa-2x" style="color: var(--primary-color);"></i>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="components/about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="components/mentalhealth.html">Mental Health</a></li>
+                            <li><a class="dropdown-item" href="components/symptom.html">Symptom Checker</a></li>
+                            <li><a class="dropdown-item" href="components/data.html">Health Data</a></li>
+                            <li><a class="dropdown-item" href="components/meal.html">Nutrition Planning</a></li>
+                            <li><a class="dropdown-item" href="components/community.html">Community</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="ms-3">
+                    <a href="components/login.html" class="btn-login">Login</a>
+                    <a href="components/signup.html" class="btn-signup">Sign Up</a>
+                </div>
             </div>
-            <div>
-              <h4>Secure & Private</h4>
-              <p>Your health data is encrypted and protected with industry-standard security.</p>
-            </div>
-          </div>
         </div>
-        <div class="col-md-4 mb-4">
-          <div class="d-flex">
-            <div class="me-3">
-              <i class="fas fa-clock fa-2x" style="color: var(--primary-color);"></i>
-            </div>
-            <div>
-              <h4>24/7 Access</h4>
-              <p>Access your health information anytime, anywhere, on any device.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="d-flex">
-            <div class="me-3">
-              <i class="fas fa-chart-pie fa-2x" style="color: var(--primary-color);"></i>
-            </div>
-            <div>
-              <h4>Insights & Analytics</h4>
-              <p>Get meaningful insights from your health data with beautiful visualizations.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white py-4">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h5><i class="fas fa-heartbeat me-2"></i>MediConnect</h5>
-          <p>Your trusted partner in health and wellness.</p>
+    <section class="hero-section" id="home">
+        <div class="floating-shape shape1"></div>
+        <div class="floating-shape shape2"></div>
+        
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="hero-title">
+                        Your Health, <span>Connected</span><br>
+                        to Better Care
+                    </h1>
+                    
+                    <div class="hero-quote">
+                        <i class="fas fa-quote-left"></i>
+                        The greatest wealth is health, and at MediConnect, we make it accessible to everyone.
+                        <span class="author">- Dr. Sarah Johnson, Founder</span>
+                    </div>
+                    
+                    <a href="components/signup.html" class="btn-get-started">
+                        <i class="fas fa-rocket me-2"></i>
+                        Get Started Today
+                    </a>
+                    
+                    <div class="mt-4">
+                        <span class="me-3"><i class="fas fa-check-circle text-success"></i> 24/7 Support</span>
+                        <span class="me-3"><i class="fas fa-check-circle text-success"></i> Secure Platform</span>
+                        <span><i class="fas fa-check-circle text-success"></i> Free Consultation</span>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="hero-image">
+                        <img src="https://img.freepik.com/free-vector/doctors-concept-illustration_114360-1515.jpg" alt="Healthcare">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4">
-          <h5>Quick Links</h5>
-          <ul class="list-unstyled">
-            <li><a href="components/about.html" class="text-white-50">About Us</a></li>
-            <li><a href="components/mentalhealth.html" class="text-white-50">Mental Health</a></li>
-            <li><a href="components/symptom.html" class="text-white-50">Symptom Checker</a></li>
-            <li><a href="components/meal.html" class="text-white-50">Nutrition Planning</a></li>
-          </ul>
+    </section>
+
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose MediConnect?</h2>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Mental Health Support</h3>
+                        <p>24/7 access to mental health resources, quizzes, and professional guidance</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>Health Tracking</h3>
+                        <p>Monitor your vital signs, track symptoms, and maintain health records</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3>Nutrition Planning</h3>
+                        <p>Personalized meal plans based on your BMI and health goals</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4">
-          <h5>Contact</h5>
-          <ul class="list-unstyled">
-            <li><i class="fas fa-envelope me-2"></i> support@mediconnect.com</li>
-            <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
-          </ul>
+    </section>
+
+    <section style="padding: 60px 0; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 mb-4">
+                    <h2 class="display-4">50K+</h2>
+                    <p>Active Users</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h2 class="display-4">100+</h2>
+                    <p>Health Experts</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h2 class="display-4">24/7</h2>
+                    <p>Support Available</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h2 class="display-4">10K+</h2>
+                    <p>Happy Stories</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <hr class="bg-light">
-      <div class="text-center">
-        <p class="mb-0">&copy; 2024 MediConnect. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+    </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module">
-    import { getCurrentUser, logout as authLogout } from './js/auth.js';
-    import { CONFIG } from './js/config.js';
+    <footer style="background: var(--secondary); color: white; padding: 30px 0;">
+        <div class="container text-center">
+            <p>&copy; 2024 MediConnect. All rights reserved. | Your Health, Our Priority</p>
+        </div>
+    </footer>
 
-    // Check if user is logged in
-    const user = getCurrentUser();
-    
-    if (user) {
-      document.getElementById('welcomeSection').style.display = 'block';
-      document.getElementById('userWelcome').innerHTML = `<i class="fas fa-user-circle me-1"></i>${user.firstName || user.email}`;
-      document.getElementById('userNameDisplay').textContent = user.firstName || 'User';
-      
-      // Fetch latest health data
-      fetch(`${CONFIG.API_URL}/health-data/${user.id}`)
-        .then(response => response.json())
-        .then(data => {
-          if (data && data.length > 0) {
-            const latest = data[data.length - 1];
-            document.getElementById('lastWeight').textContent = latest.weight || '-';
-            document.getElementById('lastBP').textContent = latest.blood_pressure || '-';
-            document.getElementById('lastHR').textContent = latest.heart_rate || '-';
-            document.getElementById('lastSleep').textContent = latest.sleep_patterns || '-';
-          }
-        })
-        .catch(error => console.error('Error fetching health data:', error));
-    }
-
-    // Logout function
-    window.logout = function() {
-      authLogout();
-    };
-  </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

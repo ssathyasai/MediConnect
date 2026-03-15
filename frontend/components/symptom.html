@@ -1,134 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MediConnect - Symptom Checker</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/symptom.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Checker - MediConnect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #b6fffa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background-color: #04364a !important;
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+        .btn-login {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        .btn-signup {
+            background: #1a7a76;
+            border: 2px solid #1a7a76;
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+        }
+        .symptom-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .disease-table {
+            width: 100%;
+            margin-top: 30px;
+        }
+        .disease-table th {
+            background: #04364a;
+            color: white;
+            padding: 12px;
+        }
+        .disease-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .disease-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .warning-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .login-prompt {
+            text-align: center;
+            padding: 50px;
+            background: white;
+            border-radius: 20px;
+            margin: 50px auto;
+            max-width: 500px;
+        }
+    </style>
 </head>
-
 <body>
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="../main.html">
-        <i class="fas fa-heartbeat me-2"></i>MediConnect
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="../main.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About Us</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
-              Services
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="mentalhealth.html">Mental Health</a></li>
-              <li><a class="dropdown-item active" href="symptom.html">Symptom Checker</a></li>
-              <li><a class="dropdown-item" href="data.html">Health Data</a></li>
-              <li><a class="dropdown-item" href="meal.html">Nutrition Planning</a></li>
-              <li><a class="dropdown-item" href="community.html">Community</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="about.html">Contact Us</a></li>
-            </ul>
-          </li>
-        </ul>
-        <div class="d-flex" id="authButtons">
-          <a href="login.html"><button class="btn btn-outline-light me-2">Login</button></a>
-          <a href="signup.html"><button class="btn btn-primary">SignUp</button></a>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../main.html"><i class="fas fa-heartbeat"></i> MediConnect</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../main.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Services</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="mentalhealth.html">Mental Health</a></li>
+                            <li><a class="dropdown-item" href="symptom.html">Symptom Checker</a></li>
+                            <li><a class="dropdown-item" href="data.html">Health Data</a></li>
+                            <li><a class="dropdown-item" href="meal.html">Nutrition Planning</a></li>
+                            <li><a class="dropdown-item" href="community.html">Community</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="ms-3">
+                    <a href="login.html" class="btn-login">Login</a>
+                    <a href="signup.html" class="btn-signup">Sign Up</a>
+                </div>
+            </div>
         </div>
-        <div class="d-flex" id="userMenu" style="display: none;">
-          <span class="text-white me-3" id="userWelcome"></span>
-          <button class="btn btn-outline-light" onclick="logout()">Logout</button>
-        </div>
-      </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Main Content -->
-  <div id="symptom-checker">
-    <h1><i class="fas fa-stethoscope me-3"></i>Symptom Checker</h1>
-    <p class="mb-4">Enter your symptoms below to receive personalized health insights.</p>
-    
-    <div class="mb-4">
-      <label for="symptoms" class="form-label">Symptoms (separated by commas):</label>
-      <input type="text" class="form-control" id="symptoms" placeholder="e.g., fever, cough, headache">
-    </div>
-    
-    <button class="btn btn-primary" onclick="checkSymptoms()">
-      <i class="fas fa-search me-2"></i>Check Symptoms
-    </button>
-    
-    <div id="result" class="alert alert-info mt-4" style="display: none;"></div>
+    <div id="content"></div>
 
-    <table id="disease-table" class="table table-hover mt-4" style="display:none;">
-      <thead>
-        <tr>
-          <th>Possible Condition</th>
-          <th>Match Probability</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Table content will be dynamically added here -->
-      </tbody>
-    </table>
-  </div>
+    <script>
+        const diseases = [
+            { name: "Common Cold", symptoms: ["runny nose", "sneezing", "cough", "sore throat"] },
+            { name: "Influenza", symptoms: ["fever", "body aches", "fatigue", "headache"] },
+            { name: "COVID-19", symptoms: ["fever", "cough", "shortness of breath", "loss of taste", "fatigue"] },
+            { name: "Allergies", symptoms: ["sneezing", "itchy eyes", "runny nose", "nasal congestion"] },
+            { name: "Migraine", symptoms: ["headache", "nausea", "sensitivity to light", "vomiting"] },
+            { name: "Sinusitis", symptoms: ["facial pain", "headache", "nasal congestion", "fever"] },
+            { name: "Bronchitis", symptoms: ["cough", "chest congestion", "fatigue", "shortness of breath"] },
+            { name: "Pneumonia", symptoms: ["fever", "chest pain", "difficulty breathing", "cough"] },
+            { name: "Stomach Flu", symptoms: ["nausea", "vomiting", "diarrhea", "stomach pain"] },
+            { name: "UTI", symptoms: ["burning urination", "frequent urination", "lower abdominal pain"] },
+            { name: "Strep Throat", symptoms: ["sore throat", "fever", "swollen lymph nodes", "difficulty swallowing"] },
+            { name: "Asthma", symptoms: ["wheezing", "shortness of breath", "chest tightness", "coughing"] },
+            { name: "Anxiety", symptoms: ["racing heart", "sweating", "trembling", "worry"] },
+            { name: "Depression", symptoms: ["sadness", "loss of interest", "fatigue", "sleep changes"] },
+            { name: "Arthritis", symptoms: ["joint pain", "stiffness", "swelling", "reduced motion"] }
+        ];
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white py-4 mt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h5><i class="fas fa-heartbeat me-2"></i>MediConnect</h5>
-          <p>Your trusted partner in health and wellness.</p>
-        </div>
-        <div class="col-md-4">
-          <h5>Quick Links</h5>
-          <ul class="list-unstyled">
-            <li><a href="../main.html" class="text-white-50">Home</a></li>
-            <li><a href="mentalhealth.html" class="text-white-50">Mental Health</a></li>
-            <li><a href="meal.html" class="text-white-50">Nutrition Planning</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <h5>Contact</h5>
-          <ul class="list-unstyled">
-            <li><i class="fas fa-envelope me-2"></i> mediconnect@gmail.com</li>
-            <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
-          </ul>
-        </div>
-      </div>
-      <hr class="bg-light">
-      <div class="text-center">
-        <p class="mb-0">&copy; 2024 MediConnect. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+        // Check login status
+        const userName = localStorage.getItem('userName');
+        const userId = localStorage.getItem('userId');
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module">
-    import { getCurrentUser, logout as authLogout } from '../js/auth.js';
+        if (!userId) {
+            document.getElementById('content').innerHTML = `
+                <div class="login-prompt">
+                    <i class="fas fa-stethoscope fa-3x text-primary mb-3"></i>
+                    <h3>Symptom Checker</h3>
+                    <p>Please login to check your symptoms and get possible conditions.</p>
+                    <a href="login.html" class="btn btn-primary">Login Now</a>
+                </div>
+            `;
+        } else {
+            document.getElementById('content').innerHTML = `
+                <div class="symptom-container">
+                    <h2 class="text-center mb-4"><i class="fas fa-stethoscope text-primary"></i> Symptom Checker</h2>
+                    <p class="text-center">Welcome, ${userName}! Enter your symptoms to see possible conditions.</p>
+                    
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle text-warning"></i>
+                        <strong>Disclaimer:</strong> This is for informational purposes only. Always consult a healthcare professional for medical advice.
+                    </div>
 
-    const user = getCurrentUser();
-    if (user) {
-      document.getElementById('authButtons').style.display = 'none';
-      document.getElementById('userMenu').style.display = 'flex';
-      document.getElementById('userWelcome').innerHTML = `<i class="fas fa-user-circle me-1"></i>${user.firstName || user.email}`;
-    }
+                    <div class="mb-4">
+                        <label class="form-label"><strong>Enter your symptoms (comma separated):</strong></label>
+                        <input type="text" id="symptoms" class="form-control" placeholder="e.g., fever, cough, headache">
+                        <button class="btn btn-primary mt-3" onclick="checkSymptoms()">Check Symptoms</button>
+                    </div>
 
-    window.logout = authLogout;
-  </script>
-  <script src="../js/symptom.js"></script>
+                    <div id="result" class="mt-4"></div>
+                    
+                    <table class="disease-table" id="diseaseTable" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th>Possible Condition</th>
+                                <th>Match Probability</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function checkSymptoms() {
+            const symptomsInput = document.getElementById('symptoms').value.toLowerCase();
+            const resultDiv = document.getElementById('result');
+            const diseaseTable = document.getElementById('diseaseTable');
+            const tableBody = document.getElementById('tableBody');
+
+            if (!symptomsInput) {
+                alert('Please enter symptoms');
+                return;
+            }
+
+            const userSymptoms = symptomsInput.split(',').map(s => s.trim());
+
+            const matches = [];
+
+            diseases.forEach(disease => {
+                let matchCount = 0;
+                userSymptoms.forEach(symptom => {
+                    if (disease.symptoms.some(s => s.includes(symptom) || symptom.includes(s))) {
+                        matchCount++;
+                    }
+                });
+
+                if (matchCount > 0) {
+                    const probability = (matchCount / disease.symptoms.length) * 100;
+                    matches.push({
+                        name: disease.name,
+                        probability: Math.min(probability, 100).toFixed(1)
+                    });
+                }
+            });
+
+            matches.sort((a, b) => b.probability - a.probability);
+
+            if (matches.length > 0) {
+                resultDiv.innerHTML = `<div class="alert alert-info">Found ${matches.length} possible condition(s):</div>`;
+                diseaseTable.style.display = 'table';
+                
+                tableBody.innerHTML = matches.slice(0, 5).map(m => `
+                    <tr>
+                        <td>${m.name}</td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar bg-primary" style="width: ${m.probability}%">
+                                    ${m.probability}%
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+            } else {
+                resultDiv.innerHTML = '<div class="alert alert-warning">No matching conditions found. Please consult a doctor.</div>';
+                diseaseTable.style.display = 'none';
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
