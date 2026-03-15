@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 
 // ============= DATABASE CONNECTION =============
 // MongoDB Atlas Connection (Cloud Database)
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://sathyasai1357:Sriramula143@cluster0.p6q3neg.mongodb.net/healthDB?retryWrites=true&w=majority'
+const MONGODB_URI = process.env.MONGODB_URI || '"mongodb+srv://sathyasai1357:Sriramula143@cluster0.p6q3neg.mongodb.net/?appName=Cluster0";'
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
