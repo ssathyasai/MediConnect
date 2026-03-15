@@ -202,7 +202,7 @@
         // Function to fetch health data
         async function fetchHealthData() {
             try {
-                const response = await fetch(`http://localhost:1234/api/getHealthData?userId=${userId}`);
+                const response = await fetch(`https://mediconnect-2p65.onrender.com/api/getHealthData?userId=${userId}`)
                 const data = await response.json();
                 
                 if (data.length > 0) {
