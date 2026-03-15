@@ -10,7 +10,7 @@ const app = express();
 
 // ============= MIDDLEWARE =============
 app.use(cors({
-    origin: '*',
+    origin: ['https://mediconnect-1-b00h.onrender.com', 'http://localhost:1234'],
     credentials: true
 }));
 app.use(express.json());
